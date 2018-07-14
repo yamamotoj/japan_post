@@ -111,4 +111,4 @@ venv.bak/
 .idea/
 
 # LocalCache
-.cache/
+cache/
