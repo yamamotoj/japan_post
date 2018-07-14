@@ -180,7 +180,12 @@ class KenAllChoikiParserTest(unittest.TestCase):
         ret = ken_all_choiki_yacc.parse_choiki(s)
         self.assertEqual('土居-(甲,乙)', str(ret), s)
 
-    '山田町下谷上（大上谷、修法ケ原、中一里山「９番地の４、１２番地を除く」長'
+    def test_choiki_parse027(self):
+        s = '山田町下谷上（大上谷、修法ケ原、中一里山「９番地の４、１２番地を除く」長尾山、再度公園）'
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('山田町下谷上-(大上谷,修法ケ原,中一里山-(除く-(9番地番地-4,12番地),長尾山),再度公園)', str(ret), s)
+
+    '野島江崎（１３、１４番地、１０番地の２、５）'
     '三田市の次に番地がくる場合'
     '白浜町の次に番地がくる場合'
-    
+    '番地のみ'

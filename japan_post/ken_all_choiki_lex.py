@@ -10,7 +10,7 @@ reserved = {
     '番': 'SUFFIX',
     '号': 'SUFFIX',
     '地割': 'SUFFIX',
-    'の': 'HYPHEN',
+    'の': 'THEN',
     '第': 'PREFIX',
     '地階': 'FLOOR',
     '階層不明': 'FLOOR',
@@ -29,7 +29,8 @@ tokens = (
     'COMPARATIVE_SUFFIX',
     'SUFFIX',
     'PREFIX',
-    'FLOOR'
+    'FLOOR',
+    'THEN',
 )
 
 parenthesis_depth = 0

@@ -66,6 +66,16 @@ def p_node_list(p):
         p[0] = p[3]
         p[0].insert(0, p[1])
 
+def p_then(p):
+    """
+    node : node THEN node
+    """
+    p[0] = NumberNode(p[1])
+    p[0].add_child(NumberNode(p[3]))
+    if p[3].suffix:
+        p[0].suffix = p[3].suffix
+        p[3].suffix = ''
+
 
 def p_range_node(p):
     """
@@ -239,6 +249,7 @@ def parse_choiki(s):
     s = s.replace('以下', ' 以下')
     s = s.replace('以外', ' 以外')
     s = s.replace('を除く', ' を除く')
+    s = s.replace('番地の', '番地 の')
     return parser.parse(s, lexer=lexer)
 
 
