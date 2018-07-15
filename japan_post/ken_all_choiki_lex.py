@@ -71,7 +71,7 @@ def t_DOT(t):
 
 # noinspection PySingleQuotedDocstring
 def t_ID(t):
-    r'[一-龥ぁ-んァ-ンＡ-Ｚａ-ｚー]+'
+    r'[一-龥ぁ-んァ-ンＡ-Ｚａ-ｚー々ヶ]+'
     t.type = reserved.get(t.value, 'ID')  # Check for reserved words
     return t
 
