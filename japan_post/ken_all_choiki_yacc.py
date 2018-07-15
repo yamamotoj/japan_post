@@ -70,9 +70,9 @@ def p_then(p):
     """
     node : node THEN node
     """
-    p[0] = NumberNode(p[1])
-    p[0].add_child(NumberNode(p[3]))
-    if p[3].suffix:
+    p[0] = p[1]
+    p[0].add_child(p[3])
+    if not p[0].suffix and p[3].suffix:
         p[0].suffix = p[3].suffix
         p[3].suffix = ''
 
@@ -197,13 +197,13 @@ def apply_suffix_to_nodes(nodes: List[Node]):
     nodes_to_apply = []
     for node in nodes:
         if isinstance(node, NumberNode) or isinstance(node, RangeNode):
-            ns = list(node.nodes_to_apply_suffix())
+            should_apply = node.should_apply_suffix()
             if node.suffix and nodes_to_apply:
                 for n in nodes_to_apply:
-                    n.suffix = node.suffix
+                    n.apply_suffix(node.suffix)
                 nodes_to_apply = []
-            else:
-                nodes_to_apply.extend(ns)
+            elif should_apply:
+                nodes_to_apply.append(node)
         else:
             nodes_to_apply = []
 

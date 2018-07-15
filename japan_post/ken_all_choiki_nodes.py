@@ -14,12 +14,11 @@ class Node:
         self.children.remove(node)
         node.parent = None
 
-    def nodes_to_apply_suffix(self) -> Generator['NumberNode', None, None]:
+    def should_apply_suffix(self) -> bool:
         if isinstance(self, NumberNode) and not self.suffix:
-            yield self
+            return True
         else:
-            for c in self.children:
-                yield from c.nodes_to_apply_suffix()
+            return any([c.should_apply_suffix() for c in self.children])
 
     def __str__(self):
         if len(self.children) > 1:
@@ -46,6 +45,15 @@ class NumberNode(Node):
         return self.prefix + str(
             self.number) + self.suffix + self.comparative_suffix + super().__str__()
 
+    def apply_suffix(self, suffix):
+        if self.suffix == suffix:
+            return
+        elif not self.suffix:
+            self.suffix = suffix
+        else:
+            for c in self.children:
+                if isinstance(c, NumberNode) or isinstance(c, RangeNode):
+                    c.apply_suffix(suffix)
 
 class RangeNode(Node):
     def __init__(self, left: NumberNode, right: NumberNode):
@@ -65,6 +73,12 @@ class RangeNode(Node):
     @property
     def suffix(self):
         return self.children[0].suffix
+
+    def apply_suffix(self, suffix):
+        if self.children:
+            for c in self.children:
+                if isinstance(c, NumberNode):
+                    c.apply_suffix(suffix)
 
 
 class StringNode(Node):
