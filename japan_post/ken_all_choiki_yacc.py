@@ -66,9 +66,10 @@ def p_node_list(p):
         p[0] = p[3]
         p[0].insert(0, p[1])
 
+
 def p_then(p):
     """
-    node : node THEN node
+    num_node : num_node THEN num_node
     """
     p[0] = p[1]
     p[0].add_child(p[3])
@@ -115,12 +116,14 @@ def p_node_succ(p):
     p[0].add_child(p[2])
 
 
-def p_node_hyphen(p):
+def p_num_node_hyphen(p):
     """
-    num_node : NUMBER HYPHEN NUMBER
+    num_node : num_node HYPHEN num_node
     """
-    p[0] = NumberNode(p[1])
-    p[0].add_child(NumberNode(p[3]))
+    p[0] = p[1]
+    p[0].add_child(p[3])
+    p[0].suffix = p[3].suffix
+    p[3].suffix = ''
 
 
 def p_node(p):
@@ -134,33 +137,41 @@ def p_node(p):
 
 def p_num_node_prefix(p):
     """
-    num_node : PREFIX num_node
+    num_node : PREFIX NUMBER
+            | PREFIX NUMBER SUFFIX
+            | PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
     """
-    p[0] = p[2]
+    p[0] = NumberNode(p[2])
     p[0].prefix = p[1]
+    if len(p) == 4:
+        p[0].suffix = p[3]
+    if len(p) == 5:
+        p[0].comparative_suffix = p[4]
 
 
 def p_num_node_suffix(p):
     """
-    num_node : num_node SUFFIX
+    num_node : NUMBER SUFFIX
+            |  NUMBER SUFFIX COMPARATIVE_SUFFIX
     """
-    p[0] = p[1]
+    p[0] = NumberNode(p[1])
     p[0].suffix = p[2]
-
-
-def p_num_node_comparative_suffix(p):
-    """
-    num_node : num_node COMPARATIVE_SUFFIX
-    """
-    p[0] = p[1]
-    p[0].comparative_suffix = p[2]
+    if len(p) == 4:
+        p[0].comparative_suffix = p[3]
 
 
 def p_num_node(p):
     """
     num_node : NUMBER
+            | NUMBER COMPARATIVE_SUFFIX
+            | PREFIX NUMBER COMPARATIVE_SUFFIX
     """
     p[0] = NumberNode(p[1])
+    if len(p) == 3:
+        p[0].comparative_suffix = p[2]
+    elif len(p) == 4:
+        p[0].prefix = p[1]
+        p[0].comparative_suffix = p[3]
 
 
 def p_string_node(p):
