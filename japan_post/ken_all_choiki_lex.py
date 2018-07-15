@@ -31,6 +31,7 @@ tokens = (
     'PREFIX',
     'FLOOR',
     'THEN',
+    'BULLET',
 )
 
 parenthesis_depth = 0
@@ -62,7 +63,7 @@ def t_DOT(t):
     r'・'
     global parenthesis_depth
     if parenthesis_depth > 0:
-        t.type = 'COMMA'
+        t.type = 'BULLET'
         return t
     else:
         return t

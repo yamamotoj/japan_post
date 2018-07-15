@@ -66,6 +66,53 @@ def p_node_list(p):
         p[0] = p[3]
         p[0].insert(0, p[1])
 
+def p_bullet_list_in_node_list(p):
+    """
+    node_list : bullet_list COMMA node_list
+            | bullet_list
+    """
+    if len(p) == 2:
+        p[0] = p[1]
+    else:
+        p[0] = p[1]
+        p[0].extend(p[3])
+
+
+def p_bullet_list_children(p):
+    """
+    node : node bullet_list
+    """
+    p[0] = p[1]
+    ns = arrange_node_list(p[2])
+    for n in ns:
+        p[0].add_child(n)
+
+
+def p_paren_bullet_list(p):
+    """
+    node : node L_PAREN bullet_list R_PAREN
+    """
+    p[0] = p[1]
+    ns = arrange_node_list(p[3])
+    for n in ns:
+        p[0].add_child(n)
+
+
+def p_bullet_list(p):
+    """
+    bullet_list : node BULLET bullet_list
+                | node
+    """
+    if len(p) == 2:
+        p[0] = [p[1]]
+    elif isinstance(p[1], NumberNode) and p[1].children:
+        for c in p[3]:
+            p[1].add_child(c)
+        p[0] = [p[1]]
+    else:
+        p[0] = p[3]
+        p[0].insert(0, p[1])
+
 
 def p_then(p):
     """
@@ -190,7 +237,7 @@ def p_dot_concat_string(p):
 
 def p_floow_string(p):
     """
-    string_node : FLOOR COMMA FLOOR
+    string_node : FLOOR BULLET FLOOR
     """
     p[0] = StringNode(p[1] + p[2] + p[3])
 
