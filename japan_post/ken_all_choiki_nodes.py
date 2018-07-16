@@ -55,6 +55,7 @@ class NumberNode(Node):
                 if isinstance(c, NumberNode) or isinstance(c, RangeNode):
                     c.apply_suffix(suffix)
 
+
 class RangeNode(Node):
     def __init__(self, left: NumberNode, right: NumberNode):
         super().__init__()
@@ -93,3 +94,12 @@ class StringNode(Node):
 class ExcludeNode(Node):
     def __str__(self):
         return '除く' + super().__str__()
+
+
+class SuffixNode(Node):
+    def __init__(self, name):
+        super().__init__()
+        self.name = name
+
+    def __str__(self):
+        return self.name + super().__str__()

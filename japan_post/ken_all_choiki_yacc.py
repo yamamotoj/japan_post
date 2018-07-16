@@ -3,7 +3,8 @@ from typing import List
 import ply.yacc as yacc
 
 from japan_post.ken_all_choiki_lex import tokens, lexer
-from japan_post.ken_all_choiki_nodes import RangeNode, NumberNode, StringNode, ExcludeNode, Node
+from japan_post.ken_all_choiki_nodes import RangeNode, NumberNode, StringNode, ExcludeNode, Node, \
+    SuffixNode
 
 
 def p_choiki(p):
@@ -178,6 +179,7 @@ def p_node(p):
     node : range_node
      | num_node
      | string_node
+     | suffix_node
     """
     p[0] = p[1]
 
@@ -241,9 +243,14 @@ def p_floow_string(p):
     """
     p[0] = StringNode(p[1] + p[2] + p[3])
 
+def p_only_suffix_node(p):
+    """
+    suffix_node : L_PAREN SUFFIX R_PAREN
+    """
+    p[0] = SuffixNode(p[2])
 
 def p_error(p):
-    print(p)
+    raise Exception(p)
 
 
 def arrange_node_list(nodes: List[Node]) -> List[Node]:
