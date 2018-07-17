@@ -308,7 +308,7 @@ def p_only_suffix_node(p):
 
 
 def p_error(p):
-    raise Exception(p)
+    raise ValueError(p)
 
 
 def arrange_node_list(nodes: List[Node]) -> List[Node]:
@@ -378,6 +378,7 @@ def parse_choiki(s):
     s = s.replace('以外', ' 以外')
     s = s.replace('を除く', ' を除く')
     s = s.replace('番地の', '番地 の')
+    lexer.parenthesis_depth = 0
     return parser.parse(s, lexer=lexer)
 
 
@@ -392,5 +393,6 @@ if __name__ == '__main__':
         '葛巻（第４０地割「５７番地１２５、１７６を除く」～第４５地割）',
     ]
     for s in ls:
+        lexer.parenthesis_depth = 0
         ret = parser.parse(s, lexer=lexer)
         print(ret)

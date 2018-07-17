@@ -36,7 +36,7 @@ tokens = (
     'BULLET',
 )
 
-parenthesis_depth = 0
+
 
 t_WAVE_DASH = r'～'
 t_COMMA = r'、'
@@ -48,23 +48,21 @@ t_ignore = ' '
 def t_L_PAREN(t):
     r'（|「|〔'
     global parenthesis_depth
-    parenthesis_depth += 1
+    t.lexer.parenthesis_depth += 1
     return t
 
 
 # noinspection PySingleQuotedDocstring
 def t_R_PAREN(t):
     r'）|」|〕'
-    global parenthesis_depth
-    parenthesis_depth -= 1
+    t.lexer.parenthesis_depth -= 1
     return t
 
 
 # noinspection PySingleQuotedDocstring
 def t_DOT(t):
     r'・'
-    global parenthesis_depth
-    if parenthesis_depth > 0:
+    if t.lexer.parenthesis_depth > 0:
         t.type = 'BULLET'
         return t
     else:
@@ -73,7 +71,7 @@ def t_DOT(t):
 
 # noinspection PySingleQuotedDocstring
 def t_ID(t):
-    r'[一-龥ぁ-んァ-ンヴＡ-Ｚａ-ｚー々ヶ]+'
+    r'[一-龥ぁ-んァ-ンヴＡ-Ｚａ-ｚー々ヶ○]+'
     t.type = reserved.get(t.value, 'ID')  # Check for reserved words
     return t
 
