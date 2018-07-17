@@ -1,10 +1,9 @@
 import codecs
 import csv
 import os
-import re
 import zipfile
 from pathlib import Path
-from typing import Generator, Tuple, List, Mapping
+from typing import Generator, Tuple
 
 import requests
 
@@ -90,8 +89,3 @@ def concatinate_read(path: Path) -> Generator[Tuple, None, None]:
                     prev_row = row
                 else:
                     raise Exception(f'illegal state:{chome_state} {row}')
-
-def fetch():
-    path = download_data()
-    for f in extract_zip(path):
-        print(f)
