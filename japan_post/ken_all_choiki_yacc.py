@@ -165,6 +165,13 @@ def p_range_node(p):
             p3.remove_child(c)
             range_node.add_child(c)
         p[0] = range_node
+    elif isinstance(p1, StringNode) and p1.children and not p3.children:
+        leaf = list(p1.get_leaf())[-1]
+        parent = leaf.parent
+        parent.remove_child(leaf)
+        range_node = RangeNode(leaf, p[3])
+        parent.add_child(range_node)
+        p[0] = p[1]
     else:
         p1.suffix = p3.suffix
         p[0] = RangeNode(p1, p3)
@@ -193,14 +200,8 @@ def p_string_node_hyphen(p):
     string_node : string_node HYPHEN num_node
     """
 
-    def get_leaf(p: Node):
-        if p.children:
-            return get_leaf(p.children[0])
-        else:
-            return p
-
     p[0] = p[1]
-    c = get_leaf(p[1])
+    c = list(p[1].get_leaf())[0]
     c.add_child(p[3])
     c.suffix = p[3].suffix
     p[3].suffix = ''
@@ -316,6 +317,8 @@ def apply_suffix_to_nodes(nodes: List[Node]):
                 nodes_to_apply = []
             elif should_apply:
                 nodes_to_apply.append(node)
+        elif isinstance(node, StringNode) and node.should_apply_suffix():
+            nodes_to_apply.append(node)
         else:
             nodes_to_apply = []
 
@@ -343,6 +346,9 @@ def replace_node_list_to_same_level_suffix(nodes: List[Node]) -> List[Node]:
                 else:
                     # noinspection PyTypeChecker
                     append_same_level_suffix(last_node, node)
+            elif isinstance(last_node, StringNode) and last_node.children and has_suffix(node):
+                # noinspection PyTypeChecker
+                append_same_level_suffix(last_node, node)
             else:
                 result_nodes.append(node)
     return result_nodes

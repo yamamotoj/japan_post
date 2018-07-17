@@ -20,6 +20,13 @@ class Node:
         else:
             return any([c.should_apply_suffix() for c in self.children])
 
+    def get_leaf(self) -> Generator['Node', None, None]:
+        if self.children:
+            for c in self.children:
+                yield from c.get_leaf()
+        else:
+            yield self
+
     def __str__(self):
         if len(self.children) > 1:
             return f"-({','.join([ str(c) for c in self.children])})"
@@ -90,6 +97,15 @@ class StringNode(Node):
     def __str__(self):
         return self.name + super().__str__()
 
+    def apply_suffix(self, suffix):
+        if self.children:
+            for c in self.children:
+                c.apply_suffix(suffix)
+
+    @property
+    def suffix(self):
+        return ''
+
 
 class ExcludeNode(Node):
     def __str__(self):
@@ -111,5 +127,4 @@ class TopNode(Node):
         if len(self.children) == 1:
             return str(self.children[0])
         else:
-            return ','.join([ str(c) for c in self.children ])
-
+            return ','.join([str(c) for c in self.children])
