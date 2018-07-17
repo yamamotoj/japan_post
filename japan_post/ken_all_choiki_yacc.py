@@ -288,9 +288,10 @@ def p_string_node(p):
 
 def p_dot_concat_string(p):
     """
-    string_node : ID DOT ID
+    string_node : string_node DOT ID
     """
-    p[0] = StringNode(p[1] + p[2] + p[3])
+    p[0] = p[1]
+    p[0].name = p[0].name + p[2] + p[3]
 
 
 def p_floow_string(p):
