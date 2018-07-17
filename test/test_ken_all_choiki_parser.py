@@ -1,8 +1,6 @@
-import csv
 import unittest
 
 from japan_post import ken_all_choiki_yacc
-from test.geo_coder import GeoCoder
 
 
 class KenAllChoikiParserTest(unittest.TestCase):
@@ -236,9 +234,7 @@ class KenAllChoikiParserTest(unittest.TestCase):
         ret = ken_all_choiki_yacc.parse_choiki(s)
         self.assertEqual('士幌-南一区-[18号~21号-南]', str(ret), s)
 
-    # def test_choiki_parse044(self):
-    #     s = '士幌（南一区２１号北～２９号）'
-    #     ret = ken_all_choiki_yacc.parse_choiki(s)
-    #     self.assertEqual('士幌-南一区-[21号-北~21号]', str(ret), s)
-
-
+    def test_choiki_parse044(self):
+        s = '士幌（南一区２１号北～２９号）'
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('士幌-南一区-[21号-北~29号]', str(ret), s)

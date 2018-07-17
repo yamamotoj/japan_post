@@ -75,7 +75,7 @@ def p_only_wave_dash(p):
     node : node WAVE_DASH
     """
     p[0] = p[1]
-    leaf = list(p[0].get_leaf())[-1]
+    leaf = p[0].get_bottom_num_node()[-1]
     leaf.comparative_suffix = '以上'
 
 
@@ -132,7 +132,7 @@ def p_then(p):
     node : node THEN num_node
     """
     p[0] = p[1]
-    leaf = list(p[0].get_leaf())[-1]
+    leaf = p[0].get_bottom_num_node()[-1]
     leaf.add_child(p[3])
     if not leaf.suffix and p[3].suffix:
         leaf.suffix = p[3].suffix
@@ -176,7 +176,7 @@ def p_range_node(p):
             range_node.add_child(c)
         p[0] = range_node
     elif isinstance(p1, StringNode) and p1.children:
-        leaf = list(p1.get_leaf())[-1]
+        leaf = list(p1.get_bottom_num_node())[-1]
         parent = leaf.parent
         parent.remove_child(leaf)
         leaf.suffix = p3.suffix
@@ -213,7 +213,7 @@ def p_string_node_hyphen(p):
     """
 
     p[0] = p[1]
-    c = list(p[1].get_leaf())[0]
+    c = p[1].get_bottom_num_node()[0]
     c.add_child(p[3])
     c.suffix = p[3].suffix
     p[3].suffix = ''
@@ -227,6 +227,16 @@ def p_node(p):
      | suffix_node
     """
     p[0] = p[1]
+
+
+def p_num_node_direction(p):
+    """
+    node : node DIRECTION
+    """
+    p[0] = p[1]
+    p2 = StringNode(p[2])
+    leaf = p[0].get_bottom_num_node()[-1]
+    leaf.add_child(p2)
 
 
 def p_num_node_prefix(p):

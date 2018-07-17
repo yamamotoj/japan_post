@@ -1,4 +1,4 @@
-from typing import Generator
+from typing import Generator, List
 
 
 class Node:
@@ -20,12 +20,17 @@ class Node:
         else:
             return any([c.should_apply_suffix() for c in self.children])
 
-    def get_leaf(self) -> Generator['Node', None, None]:
-        if self.children:
-            for c in self.children:
-                yield from c.get_leaf()
+    def get_bottom_num_node(self) -> List['NumberNode']:
+        bottom_num_nodes = []
+        for c in self.children:
+            cn = c.get_bottom_num_node()
+            bottom_num_nodes.extend(cn)
+        if bottom_num_nodes:
+            return bottom_num_nodes
+        elif isinstance(self, NumberNode):
+            return [self]
         else:
-            yield self
+            return []
 
     def __str__(self):
         if len(self.children) > 1:

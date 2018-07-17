@@ -16,6 +16,8 @@ reserved = {
     '階層不明': 'FLOOR',
     '線': 'SUFFIX',
     '区': 'SUFFIX',
+    '北': 'DIRECTION',
+    '南': 'DIRECTION',
 }
 
 tokens = (
@@ -34,6 +36,7 @@ tokens = (
     'FLOOR',
     'THEN',
     'BULLET',
+    'DIRECTION',
 )
 
 
