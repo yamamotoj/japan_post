@@ -109,7 +109,7 @@ def p_bullet_list(p):
     """
     if len(p) == 2:
         p[0] = [p[1]]
-    elif isinstance(p[1], NumberNode) and p[1].children:
+    elif (isinstance(p[1], NumberNode) or isinstance(p[1], StringNode))and p[1].children:
         for c in p[3]:
             p[1].add_child(c)
         p[0] = [p[1]]
@@ -135,7 +135,18 @@ def p_range_node(p):
     """
     p1 = p[1]
     p3 = p[3]
-    if p1.number == p3.number and p1.children and p3.children:
+
+    def is_equal_ndoes(n1, n2):
+        if type(n1) != type(n2):
+            return False
+        elif isinstance(n1, StringNode):
+            return n1.name == n2.name
+        elif isinstance(n1, NumberNode):
+            return n1.number == n2.number
+        else:
+            return False
+
+    if is_equal_ndoes(p1, p3) and p1.children and p3.children:
         c1 = p1.children[0]
         p1.remove_child(c1)
         c3 = p3.children[0]
@@ -224,6 +235,18 @@ def p_num_node(p):
     elif len(p) == 4:
         p[0].prefix = p[1]
         p[0].comparative_suffix = p[3]
+
+def p_string_and_number_node(p):
+    """
+    string_node : ID NUMBER
+                | ID NUMBER SUFFIX
+    """
+    p1 = StringNode(p[1])
+    p2 = NumberNode(p[2])
+    if len(p) == 4:
+        p2.suffix = p[3]
+    p1.add_child(p2)
+    p[0] = p1
 
 
 def p_string_node(p):
