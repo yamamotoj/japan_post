@@ -9,6 +9,7 @@ class KenAllChoikiParserTest(unittest.TestCase):
 
     def test_choiki_parse001(self):
         s = '大江（１丁目、２丁目「６５１、６６２、６６８番地」以外、３丁目５、１３－４、２０、６７８、６８７番地）'
+
         ret = ken_all_choiki_yacc.parse_choiki(s)
         self.assertEqual('大江-(1丁目,2丁目-除く-(651番地,662番地,668番地),3丁目-(5番地,13番地-4,20番地,678番地,687番地))',
                          str(ret), s)
@@ -40,10 +41,10 @@ class KenAllChoikiParserTest(unittest.TestCase):
         ret = ken_all_choiki_yacc.parse_choiki(s)
         self.assertEqual('江戸川-([1丁目~3丁目],4丁目-[1番~14番])', str(ret), s)
 
-    def test_choiki_parse007(self):
-        s = '大豆（１の２、３の２～６、４の２・４・６、１１の１番地）'
-        ret = ken_all_choiki_yacc.parse_choiki(s)
-        self.assertEqual('大豆（1番地-2、3番地-[2~6]、4番地-(2,4,6)、11番地-1）', str(ret), s)
+    # def test_choiki_parse007(self):
+    #     s = '大豆（１の２、３の２～６、４の２・４・６、１１の１番地）'
+    #     ret = ken_all_choiki_yacc.parse_choiki(s)
+    #     self.assertEqual('大豆（1番地-2、3番地-[2~6]、4番地-(2,4,6)、11番地-1）', str(ret), s)
 
     def test_choiki_parse008(self):
         s = '仁礼町（３１５３－１～３１５３－１１００「峰の原」）'
@@ -184,11 +185,11 @@ class KenAllChoikiParserTest(unittest.TestCase):
         self.assertEqual('毛萱-前川原-([232番地~244番地],311番地,312番地,[337番地~862番地]-東京電力福島第二原子力発電所構内)',
                          str(ret), s)
 
-    # def test_choiki_parse034(self):
-    #     s = '美栄町（西５～８線７９～１１０番地）'
-    #     print(s)
-    #     ret = ken_all_choiki_yacc.parse_choiki(s)
-    #     self.assertEqual('', str(ret), s)
+    def test_choiki_parse034(self):
+        s = '美栄町（西５～８線７９～１１０番地）'
+        print(s)
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('美栄町-西-[5線~8線-[79番地~110番地]]', str(ret), s)
 
     def test_choiki_parse035(self):
         s = '位登（猪位金４～７区、清美町）'
@@ -229,5 +230,15 @@ class KenAllChoikiParserTest(unittest.TestCase):
         s = '三田市の次に番地がくる場合'
         ret = ken_all_choiki_yacc.parse_choiki(s)
         self.assertEqual('の次に番地がくる場合', str(ret), s)
+
+    def test_choiki_parse043(self):
+        s = '士幌（南一区１８号～２１号南）'
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('士幌-南一区-[18号~21号-南]', str(ret), s)
+
+    # def test_choiki_parse044(self):
+    #     s = '士幌（南一区２１号北～２９号）'
+    #     ret = ken_all_choiki_yacc.parse_choiki(s)
+    #     self.assertEqual('士幌-南一区-[21号-北~21号]', str(ret), s)
 
 

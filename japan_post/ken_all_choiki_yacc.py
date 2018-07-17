@@ -175,7 +175,7 @@ def p_range_node(p):
             p3.remove_child(c)
             range_node.add_child(c)
         p[0] = range_node
-    elif isinstance(p1, StringNode) and p1.children and not p3.children:
+    elif isinstance(p1, StringNode) and p1.children:
         leaf = list(p1.get_leaf())[-1]
         parent = leaf.parent
         parent.remove_child(leaf)
@@ -184,7 +184,8 @@ def p_range_node(p):
         parent.add_child(range_node)
         p[0] = p[1]
     else:
-        p1.suffix = p3.suffix
+        if isinstance(p1, NumberNode):
+            p1.suffix = p3.suffix
         p[0] = RangeNode(p1, p3)
 
 
@@ -381,6 +382,8 @@ def parse_choiki(s):
     s = s.replace('を除く', ' を除く')
     s = s.replace('番地のみ', '番地')
     s = s.replace('番地の', '番地 の')
+    s = s.replace('号北', '号 北')
+    s = s.replace('号南', '号 南')
     lexer.parenthesis_depth = 0
     return parser.parse(s, lexer=lexer)
 
