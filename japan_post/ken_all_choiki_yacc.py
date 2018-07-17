@@ -129,12 +129,13 @@ def p_bullet_list(p):
 
 def p_then(p):
     """
-    num_node : num_node THEN num_node
+    node : node THEN num_node
     """
     p[0] = p[1]
-    p[0].add_child(p[3])
-    if not p[0].suffix and p[3].suffix:
-        p[0].suffix = p[3].suffix
+    leaf = list(p[0].get_leaf())[-1]
+    leaf.add_child(p[3])
+    if not leaf.suffix and p[3].suffix:
+        leaf.suffix = p[3].suffix
         p[3].suffix = ''
 
 
