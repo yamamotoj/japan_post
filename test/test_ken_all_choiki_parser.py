@@ -39,10 +39,10 @@ class KenAllChoikiParserTest(unittest.TestCase):
         ret = ken_all_choiki_yacc.parse_choiki(s)
         self.assertEqual('江戸川-([1丁目~3丁目],4丁目-[1番~14番])', str(ret), s)
 
-    # def test_choiki_parse007(self):
-    #     s = '大豆（１の２、３の２～６、４の２・４・６、１１の１番地）'
-    #     ret = ken_all_choiki_yacc.parse_choiki(s)
-    #     self.assertEqual('大豆（1番地-2、3番地-[2~6]、4番地-(2,4,6)、11番地-1）', str(ret), s)
+    def test_choiki_parse007(self):
+        s = '大豆（１の２、３の２～６、４の２・４・６、１１の１番地）'
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('大豆-(1番地-2,3番地-[2~6],4番地-(2,4,6),11番地-1)', str(ret), s)
 
     def test_choiki_parse008(self):
         s = '仁礼町（３１５３－１～３１５３－１１００「峰の原」）'
@@ -87,7 +87,7 @@ class KenAllChoikiParserTest(unittest.TestCase):
         s = '南山（４３０番地以上「１７７０－１～２、１８６２－４２、１９２３－５を除く」、大谷地、折渡、鍵金野、金山、滝ノ沢、豊牧、沼の台、肘折、平林）'
         ret = ken_all_choiki_yacc.parse_choiki(s)
         self.assertEqual(
-            '南山-(430番地以上-除く-([1770-1~2],1862-42,1923-5),大谷地,折渡,鍵金野,金山,滝ノ沢,豊牧,沼の台,肘折,平林)',
+            '南山-(430番地以上-除く-(1770-[1~2],1862-42,1923-5),大谷地,折渡,鍵金野,金山,滝ノ沢,豊牧,沼の台,肘折,平林)',
             str(ret), s)
 
     def test_choiki_parse016(self):

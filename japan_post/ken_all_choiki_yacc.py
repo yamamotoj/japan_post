@@ -175,8 +175,8 @@ def p_range_node(p):
             p3.remove_child(c)
             range_node.add_child(c)
         p[0] = range_node
-    elif isinstance(p1, StringNode) and p1.children:
-        leaf = list(p1.get_bottom_num_node())[-1]
+    elif p1.children and len(p1.get_bottom_num_node()) == 1:
+        leaf = p1.get_bottom_num_node()[-1]
         parent = leaf.parent
         parent.remove_child(leaf)
         leaf.suffix = p3.suffix
