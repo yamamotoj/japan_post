@@ -4,14 +4,16 @@ import ply.yacc as yacc
 
 from japan_post.ken_all_choiki_lex import tokens, lexer
 from japan_post.ken_all_choiki_nodes import RangeNode, NumberNode, StringNode, ExcludeNode, Node, \
-    SuffixNode
+    SuffixNode, TopNode
 
 
 def p_choiki(p):
     """
-    choiki : node
+    choiki : node_list
     """
-    p[0] = p[1]
+    p[0] = TopNode()
+    for n in p[1]:
+        p[0].add_child(n)
 
 
 def p_node_list_children(p):
@@ -66,6 +68,7 @@ def p_node_list(p):
     else:
         p[0] = p[3]
         p[0].insert(0, p[1])
+
 
 def p_bullet_list_in_node_list(p):
     """
@@ -243,11 +246,13 @@ def p_floow_string(p):
     """
     p[0] = StringNode(p[1] + p[2] + p[3])
 
+
 def p_only_suffix_node(p):
     """
     suffix_node : L_PAREN SUFFIX R_PAREN
     """
     p[0] = SuffixNode(p[2])
+
 
 def p_error(p):
     raise Exception(p)

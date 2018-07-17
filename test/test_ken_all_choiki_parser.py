@@ -1,7 +1,9 @@
+import csv
 import unittest
 
 from japan_post import ken_all_choiki_yacc
 from japan_post.ken_all_choiki_lex import lexer
+from test.geo_coder import GeoCoder
 
 
 class KenAllChoikiParserTest(unittest.TestCase):
@@ -185,7 +187,12 @@ class KenAllChoikiParserTest(unittest.TestCase):
         ret = ken_all_choiki_yacc.parse_choiki(s)
         self.assertEqual('山田町下谷上-(大上谷,修法ケ原,中一里山-(除く-(9番地-4,12番地),長尾山),再度公園)', str(ret), s)
 
-    '野島江崎（１３、１４番地、１０番地の２、５）'
-    '三田市の次に番地がくる場合'
-    '白浜町の次に番地がくる場合'
-    '番地のみ'
+    def test_choiki_parse028(self):
+        s = '阿寒町上仁々志別'
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('阿寒町上仁々志別', str(ret), s)
+
+    def test_choiki_parse029(self):
+        s = '穴明２２地割、穴明２３地割'
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('穴明-22地割,穴明-23地割', str(ret), s)

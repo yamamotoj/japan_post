@@ -103,3 +103,13 @@ class SuffixNode(Node):
 
     def __str__(self):
         return self.name + super().__str__()
+
+
+class TopNode(Node):
+
+    def __str__(self):
+        if len(self.children) == 1:
+            return str(self.children[0])
+        else:
+            return ','.join([ str(c) for c in self.children ])
+

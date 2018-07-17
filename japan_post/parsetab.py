@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BULLET COMMA COMPARATIVE_SUFFIX DOT EXCLUDE FLOOR HYPHEN ID L_PAREN NUMBER PREFIX R_PAREN SUFFIX THEN WAVE_DASH\n    choiki : node\n    \n    node : node L_PAREN node_list R_PAREN\n    \n    node : node L_PAREN node_list EXCLUDE R_PAREN\n    \n    node : node L_PAREN node_list R_PAREN EXCLUDE\n    \n    node_list : node COMMA node_list\n            | node\n    \n    node_list : bullet_list COMMA node_list\n            | bullet_list\n    \n    node : node bullet_list\n    \n    node : node L_PAREN bullet_list R_PAREN\n    \n    bullet_list : node BULLET bullet_list\n                | node\n    \n    num_node : num_node THEN num_node\n    \n    range_node : node WAVE_DASH node\n    \n    node : node node\n    \n    num_node : num_node HYPHEN num_node\n    \n    node : range_node\n     | num_node\n     | string_node\n     | suffix_node\n    \n    num_node : PREFIX NUMBER\n            | PREFIX NUMBER SUFFIX\n            | PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX\n    \n    num_node : NUMBER SUFFIX\n            |  NUMBER SUFFIX COMPARATIVE_SUFFIX\n    \n    num_node : NUMBER\n            | NUMBER COMPARATIVE_SUFFIX\n            | PREFIX NUMBER COMPARATIVE_SUFFIX\n    \n    string_node : ID\n    \n    string_node : ID DOT ID\n    \n    string_node : FLOOR BULLET FLOOR\n    \n    suffix_node : L_PAREN SUFFIX R_PAREN\n    '
+_lr_signature = 'BULLET COMMA COMPARATIVE_SUFFIX DOT EXCLUDE FLOOR HYPHEN ID L_PAREN NUMBER PREFIX R_PAREN SUFFIX THEN WAVE_DASH\n    choiki : node_list\n    \n    node : node L_PAREN node_list R_PAREN\n    \n    node : node L_PAREN node_list EXCLUDE R_PAREN\n    \n    node : node L_PAREN node_list R_PAREN EXCLUDE\n    \n    node_list : node COMMA node_list\n            | node\n    \n    node_list : bullet_list COMMA node_list\n            | bullet_list\n    \n    node : node bullet_list\n    \n    node : node L_PAREN bullet_list R_PAREN\n    \n    bullet_list : node BULLET bullet_list\n                | node\n    \n    num_node : num_node THEN num_node\n    \n    range_node : node WAVE_DASH node\n    \n    node : node node\n    \n    num_node : num_node HYPHEN num_node\n    \n    node : range_node\n     | num_node\n     | string_node\n     | suffix_node\n    \n    num_node : PREFIX NUMBER\n            | PREFIX NUMBER SUFFIX\n            | PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX\n    \n    num_node : NUMBER SUFFIX\n            |  NUMBER SUFFIX COMPARATIVE_SUFFIX\n    \n    num_node : NUMBER\n            | NUMBER COMPARATIVE_SUFFIX\n            | PREFIX NUMBER COMPARATIVE_SUFFIX\n    \n    string_node : ID\n    \n    string_node : ID DOT ID\n    \n    string_node : FLOOR BULLET FLOOR\n    \n    suffix_node : L_PAREN SUFFIX R_PAREN\n    '
     
-_lr_action_items = {'PREFIX':([0,2,4,5,6,7,9,10,12,13,14,15,17,18,19,20,21,24,25,28,29,30,31,32,33,34,35,36,37,38,39,40,42,43,44,45,48,49,],[8,8,-17,-18,-19,-20,-26,-29,8,8,-9,8,8,8,-21,-24,-27,8,8,8,-32,-13,-16,-22,-28,-25,-30,-31,8,-11,8,-2,-10,8,-23,8,-4,-3,]),'NUMBER':([0,2,4,5,6,7,8,9,10,12,13,14,15,17,18,19,20,21,24,25,28,29,30,31,32,33,34,35,36,37,38,39,40,42,43,44,45,48,49,],[9,9,-17,-18,-19,-20,19,-26,-29,9,9,-9,9,9,9,-21,-24,-27,9,9,9,-32,-13,-16,-22,-28,-25,-30,-31,9,-11,9,-2,-10,9,-23,9,-4,-3,]),'ID':([0,2,4,5,6,7,9,10,12,13,14,15,19,20,21,22,24,25,28,29,30,31,32,33,34,35,36,37,38,39,40,42,43,44,45,48,49,],[10,10,-17,-18,-19,-20,-26,-29,10,10,-9,10,-21,-24,-27,35,10,10,10,-32,-13,-16,-22,-28,-25,-30,-31,10,-11,10,-2,-10,10,-23,10,-4,-3,]),'FLOOR':([0,2,4,5,6,7,9,10,12,13,14,15,19,20,21,23,24,25,28,29,30,31,32,33,34,35,36,37,38,39,40,42,43,44,45,48,49,],[11,11,-17,-18,-19,-20,-26,-29,11,11,-9,11,-21,-24,-27,36,11,11,11,-32,-13,-16,-22,-28,-25,-30,-31,11,-11,11,-2,-10,11,-23,11,-4,-3,]),'L_PAREN':([0,2,4,5,6,7,9,10,12,13,14,15,19,20,21,24,25,28,29,30,31,32,33,34,35,36,37,38,39,40,42,43,44,45,48,49,],[3,13,-17,-18,-19,-20,-26,-29,13,3,-9,3,-21,-24,-27,3,13,13,-32,-13,-16,-22,-28,-25,-30,-31,13,-11,3,-2,-10,3,-23,13,-4,-3,]),'$end':([1,2,4,5,6,7,9,10,12,14,19,20,21,28,29,30,31,32,33,34,35,36,37,38,40,42,44,48,49,],[0,-1,-17,-18,-19,-20,-26,-29,-12,-9,-21,-24,-27,-14,-32,-13,-16,-22,-28,-25,-30,-31,-12,-11,-2,-10,-23,-4,-3,]),'WAVE_DASH':([2,4,5,6,7,9,10,12,14,19,20,21,25,28,29,30,31,32,33,34,35,36,37,38,40,42,44,45,48,49,],[15,-17,-18,-19,-20,-26,-29,15,-9,-21,-24,-27,15,15,-32,-13,-16,-22,-28,-25,-30,-31,15,-11,-2,-10,-23,15,-4,-3,]),'SUFFIX':([3,9,13,19,],[16,20,16,32,]),'BULLET':([4,5,6,7,9,10,11,12,14,19,20,21,25,28,29,30,31,32,33,34,35,36,37,38,40,42,44,45,48,49,],[-17,-18,-19,-20,-26,-29,23,24,-9,-21,-24,-27,24,-14,-32,-13,-16,-22,-28,-25,-30,-31,24,-11,-2,-10,-23,24,-4,-3,]),'COMMA':([4,5,6,7,9,10,12,14,19,20,21,25,27,28,29,30,31,32,33,34,35,36,37,38,40,42,44,45,47,48,49,],[-17,-18,-19,-20,-26,-29,-12,-9,-21,-24,-27,39,43,-14,-32,-13,-16,-22,-28,-25,-30,-31,-12,-11,-2,-10,-23,39,43,-4,-3,]),'R_PAREN':([4,5,6,7,9,10,12,14,16,19,20,21,25,26,27,28,29,30,31,32,33,34,35,36,37,38,40,41,42,44,45,46,47,48,49,50,],[-17,-18,-19,-20,-26,-29,-12,-9,29,-21,-24,-27,-6,40,42,-14,-32,-13,-16,-22,-28,-25,-30,-31,-12,-11,-2,49,-10,-23,-6,-5,-8,-4,-3,-7,]),'EXCLUDE':([4,5,6,7,9,10,12,14,19,20,21,25,26,27,28,29,30,31,32,33,34,35,36,37,38,40,42,44,45,46,47,48,49,50,],[-17,-18,-19,-20,-26,-29,-12,-9,-21,-24,-27,-6,41,-8,-14,-32,-13,-16,-22,-28,-25,-30,-31,-12,-11,48,-10,-23,-6,-5,-8,-4,-3,-7,]),'THEN':([5,9,19,20,21,30,31,32,33,34,44,],[17,-26,-21,-24,-27,17,17,-22,-28,-25,-23,]),'HYPHEN':([5,9,19,20,21,30,31,32,33,34,44,],[18,-26,-21,-24,-27,18,18,-22,-28,-25,-23,]),'COMPARATIVE_SUFFIX':([9,19,20,32,],[21,33,34,44,]),'DOT':([10,],[22,]),}
+_lr_action_items = {'PREFIX':([0,3,6,7,8,9,11,12,14,15,16,17,18,19,20,22,23,24,25,26,30,33,34,35,37,38,39,40,41,42,43,44,45,47,48,49,50,],[10,10,-17,-18,-19,-20,-26,-29,10,10,10,-9,10,10,10,10,10,-21,-24,-27,10,10,-11,10,-32,-13,-16,-22,-28,-25,-30,-31,-2,-10,-23,-4,-3,]),'NUMBER':([0,3,6,7,8,9,10,11,12,14,15,16,17,18,19,20,22,23,24,25,26,30,33,34,35,37,38,39,40,41,42,43,44,45,47,48,49,50,],[11,11,-17,-18,-19,-20,24,-26,-29,11,11,11,-9,11,11,11,11,11,-21,-24,-27,11,11,-11,11,-32,-13,-16,-22,-28,-25,-30,-31,-2,-10,-23,-4,-3,]),'ID':([0,3,6,7,8,9,11,12,14,15,16,17,18,19,20,24,25,26,27,30,33,34,35,37,38,39,40,41,42,43,44,45,47,48,49,50,],[12,12,-17,-18,-19,-20,-26,-29,12,12,12,-9,12,12,12,-21,-24,-27,43,12,12,-11,12,-32,-13,-16,-22,-28,-25,-30,-31,-2,-10,-23,-4,-3,]),'FLOOR':([0,3,6,7,8,9,11,12,14,15,16,17,18,19,20,24,25,26,28,30,33,34,35,37,38,39,40,41,42,43,44,45,47,48,49,50,],[13,13,-17,-18,-19,-20,-26,-29,13,13,13,-9,13,13,13,-21,-24,-27,44,13,13,-11,13,-32,-13,-16,-22,-28,-25,-30,-31,-2,-10,-23,-4,-3,]),'L_PAREN':([0,3,6,7,8,9,11,12,14,15,16,17,18,19,20,24,25,26,30,33,34,35,37,38,39,40,41,42,43,44,45,47,48,49,50,],[5,16,-17,-18,-19,-20,-26,-29,16,5,5,-9,5,5,5,-21,-24,-27,16,16,-11,16,-32,-13,-16,-22,-28,-25,-30,-31,-2,-10,-23,-4,-3,]),'$end':([1,2,3,4,6,7,8,9,11,12,14,17,24,25,26,29,33,34,35,36,37,38,39,40,41,42,43,44,45,47,48,49,50,],[0,-1,-6,-8,-17,-18,-19,-20,-26,-29,-12,-9,-21,-24,-27,-5,-12,-11,-14,-7,-32,-13,-16,-22,-28,-25,-30,-31,-2,-10,-23,-4,-3,]),'COMMA':([3,4,6,7,8,9,11,12,14,17,24,25,26,30,32,33,34,35,37,38,39,40,41,42,43,44,45,47,48,49,50,],[15,20,-17,-18,-19,-20,-26,-29,-12,-9,-21,-24,-27,15,20,-12,-11,-14,-32,-13,-16,-22,-28,-25,-30,-31,-2,-10,-23,-4,-3,]),'R_PAREN':([3,4,6,7,8,9,11,12,14,17,21,24,25,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,],[-6,-8,-17,-18,-19,-20,-26,-29,-12,-9,37,-21,-24,-27,-5,-6,45,47,-12,-11,-14,-7,-32,-13,-16,-22,-28,-25,-30,-31,-2,50,-10,-23,-4,-3,]),'EXCLUDE':([3,4,6,7,8,9,11,12,14,17,24,25,26,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,47,48,49,50,],[-6,-8,-17,-18,-19,-20,-26,-29,-12,-9,-21,-24,-27,-5,-6,46,-8,-12,-11,-14,-7,-32,-13,-16,-22,-28,-25,-30,-31,49,-10,-23,-4,-3,]),'BULLET':([3,6,7,8,9,11,12,13,14,17,24,25,26,30,33,34,35,37,38,39,40,41,42,43,44,45,47,48,49,50,],[18,-17,-18,-19,-20,-26,-29,28,18,-9,-21,-24,-27,18,18,-11,-14,-32,-13,-16,-22,-28,-25,-30,-31,-2,-10,-23,-4,-3,]),'WAVE_DASH':([3,6,7,8,9,11,12,14,17,24,25,26,30,33,34,35,37,38,39,40,41,42,43,44,45,47,48,49,50,],[19,-17,-18,-19,-20,-26,-29,19,-9,-21,-24,-27,19,19,-11,19,-32,-13,-16,-22,-28,-25,-30,-31,-2,-10,-23,-4,-3,]),'SUFFIX':([5,11,16,24,],[21,25,21,40,]),'THEN':([7,11,24,25,26,38,39,40,41,42,48,],[22,-26,-21,-24,-27,22,22,-22,-28,-25,-23,]),'HYPHEN':([7,11,24,25,26,38,39,40,41,42,48,],[23,-26,-21,-24,-27,23,23,-22,-28,-25,-23,]),'COMPARATIVE_SUFFIX':([11,24,25,40,],[26,41,42,48,]),'DOT':([12,],[27,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'choiki':([0,],[1,]),'node':([0,2,12,13,15,24,25,28,37,39,43,45,],[2,12,12,25,28,37,12,12,12,45,45,12,]),'range_node':([0,2,12,13,15,24,25,28,37,39,43,45,],[4,4,4,4,4,4,4,4,4,4,4,4,]),'num_node':([0,2,12,13,15,17,18,24,25,28,37,39,43,45,],[5,5,5,5,5,30,31,5,5,5,5,5,5,5,]),'string_node':([0,2,12,13,15,24,25,28,37,39,43,45,],[6,6,6,6,6,6,6,6,6,6,6,6,]),'suffix_node':([0,2,12,13,15,24,25,28,37,39,43,45,],[7,7,7,7,7,7,7,7,7,7,7,7,]),'bullet_list':([2,12,13,24,25,28,37,39,43,45,],[14,14,27,38,14,14,14,47,47,14,]),'node_list':([13,39,43,],[26,46,50,]),}
+_lr_goto_items = {'choiki':([0,],[1,]),'node_list':([0,15,16,20,],[2,29,31,36,]),'node':([0,3,14,15,16,18,19,20,30,33,35,],[3,14,14,3,30,33,35,3,14,14,14,]),'bullet_list':([0,3,14,15,16,18,20,30,33,35,],[4,17,17,4,32,34,4,17,17,17,]),'range_node':([0,3,14,15,16,18,19,20,30,33,35,],[6,6,6,6,6,6,6,6,6,6,6,]),'num_node':([0,3,14,15,16,18,19,20,22,23,30,33,35,],[7,7,7,7,7,7,7,7,38,39,7,7,7,]),'string_node':([0,3,14,15,16,18,19,20,30,33,35,],[8,8,8,8,8,8,8,8,8,8,8,]),'suffix_node':([0,3,14,15,16,18,19,20,30,33,35,],[9,9,9,9,9,9,9,9,9,9,9,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,36 +27,36 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> choiki","S'",1,None,None,None),
-  ('choiki -> node','choiki',1,'p_choiki','ken_all_choiki_yacc.py',12),
-  ('node -> node L_PAREN node_list R_PAREN','node',4,'p_node_list_children','ken_all_choiki_yacc.py',19),
-  ('node -> node L_PAREN node_list EXCLUDE R_PAREN','node',5,'p_exlude_node','ken_all_choiki_yacc.py',29),
-  ('node -> node L_PAREN node_list R_PAREN EXCLUDE','node',5,'p_exlude_node2','ken_all_choiki_yacc.py',41),
-  ('node_list -> node COMMA node_list','node_list',3,'p_node_list','ken_all_choiki_yacc.py',53),
-  ('node_list -> node','node_list',1,'p_node_list','ken_all_choiki_yacc.py',54),
-  ('node_list -> bullet_list COMMA node_list','node_list',3,'p_bullet_list_in_node_list','ken_all_choiki_yacc.py',72),
-  ('node_list -> bullet_list','node_list',1,'p_bullet_list_in_node_list','ken_all_choiki_yacc.py',73),
-  ('node -> node bullet_list','node',2,'p_bullet_list_children','ken_all_choiki_yacc.py',84),
-  ('node -> node L_PAREN bullet_list R_PAREN','node',4,'p_paren_bullet_list','ken_all_choiki_yacc.py',94),
-  ('bullet_list -> node BULLET bullet_list','bullet_list',3,'p_bullet_list','ken_all_choiki_yacc.py',104),
-  ('bullet_list -> node','bullet_list',1,'p_bullet_list','ken_all_choiki_yacc.py',105),
-  ('num_node -> num_node THEN num_node','num_node',3,'p_then','ken_all_choiki_yacc.py',120),
-  ('range_node -> node WAVE_DASH node','range_node',3,'p_range_node','ken_all_choiki_yacc.py',131),
-  ('node -> node node','node',2,'p_node_succ','ken_all_choiki_yacc.py',161),
-  ('num_node -> num_node HYPHEN num_node','num_node',3,'p_num_node_hyphen','ken_all_choiki_yacc.py',169),
-  ('node -> range_node','node',1,'p_node','ken_all_choiki_yacc.py',179),
-  ('node -> num_node','node',1,'p_node','ken_all_choiki_yacc.py',180),
-  ('node -> string_node','node',1,'p_node','ken_all_choiki_yacc.py',181),
-  ('node -> suffix_node','node',1,'p_node','ken_all_choiki_yacc.py',182),
-  ('num_node -> PREFIX NUMBER','num_node',2,'p_num_node_prefix','ken_all_choiki_yacc.py',189),
-  ('num_node -> PREFIX NUMBER SUFFIX','num_node',3,'p_num_node_prefix','ken_all_choiki_yacc.py',190),
-  ('num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX','num_node',4,'p_num_node_prefix','ken_all_choiki_yacc.py',191),
-  ('num_node -> NUMBER SUFFIX','num_node',2,'p_num_node_suffix','ken_all_choiki_yacc.py',203),
-  ('num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX','num_node',3,'p_num_node_suffix','ken_all_choiki_yacc.py',204),
-  ('num_node -> NUMBER','num_node',1,'p_num_node','ken_all_choiki_yacc.py',214),
-  ('num_node -> NUMBER COMPARATIVE_SUFFIX','num_node',2,'p_num_node','ken_all_choiki_yacc.py',215),
-  ('num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX','num_node',3,'p_num_node','ken_all_choiki_yacc.py',216),
-  ('string_node -> ID','string_node',1,'p_string_node','ken_all_choiki_yacc.py',228),
-  ('string_node -> ID DOT ID','string_node',3,'p_dot_concat_string','ken_all_choiki_yacc.py',235),
-  ('string_node -> FLOOR BULLET FLOOR','string_node',3,'p_floow_string','ken_all_choiki_yacc.py',242),
-  ('suffix_node -> L_PAREN SUFFIX R_PAREN','suffix_node',3,'p_only_suffix_node','ken_all_choiki_yacc.py',248),
+  ('choiki -> node_list','choiki',1,'p_choiki','ken_all_choiki_yacc.py',12),
+  ('node -> node L_PAREN node_list R_PAREN','node',4,'p_node_list_children','ken_all_choiki_yacc.py',21),
+  ('node -> node L_PAREN node_list EXCLUDE R_PAREN','node',5,'p_exlude_node','ken_all_choiki_yacc.py',31),
+  ('node -> node L_PAREN node_list R_PAREN EXCLUDE','node',5,'p_exlude_node2','ken_all_choiki_yacc.py',43),
+  ('node_list -> node COMMA node_list','node_list',3,'p_node_list','ken_all_choiki_yacc.py',55),
+  ('node_list -> node','node_list',1,'p_node_list','ken_all_choiki_yacc.py',56),
+  ('node_list -> bullet_list COMMA node_list','node_list',3,'p_bullet_list_in_node_list','ken_all_choiki_yacc.py',75),
+  ('node_list -> bullet_list','node_list',1,'p_bullet_list_in_node_list','ken_all_choiki_yacc.py',76),
+  ('node -> node bullet_list','node',2,'p_bullet_list_children','ken_all_choiki_yacc.py',87),
+  ('node -> node L_PAREN bullet_list R_PAREN','node',4,'p_paren_bullet_list','ken_all_choiki_yacc.py',97),
+  ('bullet_list -> node BULLET bullet_list','bullet_list',3,'p_bullet_list','ken_all_choiki_yacc.py',107),
+  ('bullet_list -> node','bullet_list',1,'p_bullet_list','ken_all_choiki_yacc.py',108),
+  ('num_node -> num_node THEN num_node','num_node',3,'p_then','ken_all_choiki_yacc.py',123),
+  ('range_node -> node WAVE_DASH node','range_node',3,'p_range_node','ken_all_choiki_yacc.py',134),
+  ('node -> node node','node',2,'p_node_succ','ken_all_choiki_yacc.py',164),
+  ('num_node -> num_node HYPHEN num_node','num_node',3,'p_num_node_hyphen','ken_all_choiki_yacc.py',172),
+  ('node -> range_node','node',1,'p_node','ken_all_choiki_yacc.py',182),
+  ('node -> num_node','node',1,'p_node','ken_all_choiki_yacc.py',183),
+  ('node -> string_node','node',1,'p_node','ken_all_choiki_yacc.py',184),
+  ('node -> suffix_node','node',1,'p_node','ken_all_choiki_yacc.py',185),
+  ('num_node -> PREFIX NUMBER','num_node',2,'p_num_node_prefix','ken_all_choiki_yacc.py',192),
+  ('num_node -> PREFIX NUMBER SUFFIX','num_node',3,'p_num_node_prefix','ken_all_choiki_yacc.py',193),
+  ('num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX','num_node',4,'p_num_node_prefix','ken_all_choiki_yacc.py',194),
+  ('num_node -> NUMBER SUFFIX','num_node',2,'p_num_node_suffix','ken_all_choiki_yacc.py',206),
+  ('num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX','num_node',3,'p_num_node_suffix','ken_all_choiki_yacc.py',207),
+  ('num_node -> NUMBER','num_node',1,'p_num_node','ken_all_choiki_yacc.py',217),
+  ('num_node -> NUMBER COMPARATIVE_SUFFIX','num_node',2,'p_num_node','ken_all_choiki_yacc.py',218),
+  ('num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX','num_node',3,'p_num_node','ken_all_choiki_yacc.py',219),
+  ('string_node -> ID','string_node',1,'p_string_node','ken_all_choiki_yacc.py',231),
+  ('string_node -> ID DOT ID','string_node',3,'p_dot_concat_string','ken_all_choiki_yacc.py',238),
+  ('string_node -> FLOOR BULLET FLOOR','string_node',3,'p_floow_string','ken_all_choiki_yacc.py',245),
+  ('suffix_node -> L_PAREN SUFFIX R_PAREN','suffix_node',3,'p_only_suffix_node','ken_all_choiki_yacc.py',252),
 ]
