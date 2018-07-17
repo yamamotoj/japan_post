@@ -195,3 +195,52 @@ class KenAllChoikiParserTest(unittest.TestCase):
         s = '位登（猪位金４～７区、清美町）'
         ret = ken_all_choiki_yacc.parse_choiki(s)
         self.assertEqual('位登-(猪位金-[4区~7区],清美町)', str(ret), s)
+
+    def test_choiki_parse036(self):
+        s = '大前（細原２２５９～）'
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('大前-細原-2259以上', str(ret), s)
+
+    def test_choiki_parse037(self):
+        s = ''
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('', str(ret), s)
+
+    def test_choiki_parse038(self):
+        s = ''
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('', str(ret), s)
+
+    def test_choiki_parse039(self):
+        s = ''
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('', str(ret), s)
+
+    def test_choiki_parse040(self):
+        s = ''
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('', str(ret), s)
+
+    def test_choiki_parse041(self):
+        s = ''
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('', str(ret), s)
+
+    def test_all_choiki(self):
+        with open('cache/ken_all_concatenated.csv') as f:
+            for r in csv.reader(f):
+                try:
+                    ret = ken_all_choiki_yacc.parse_choiki(r[8])
+                    if not ret:
+                        print(r[8])
+                except:
+                    print(r[8])
+
+    '野島江崎（１３、１４番地、１０番地の２、５）'
+    '三田市の次に番地がくる場合'
+    '白浜町の次に番地がくる場合'
+    '番地のみ'
+
+    def test_geo_code(self):
+        ret = GeoCoder().geocode('栃木県小山市神鳥谷1')
+        print(ret)

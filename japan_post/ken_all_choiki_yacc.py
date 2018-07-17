@@ -70,6 +70,15 @@ def p_node_list(p):
         p[0].insert(0, p[1])
 
 
+def p_only_wave_dash(p):
+    """
+    node : node WAVE_DASH
+    """
+    p[0] = p[1]
+    leaf = list(p[0].get_leaf())[-1]
+    leaf.comparative_suffix = '以上'
+
+
 def p_bullet_list_in_node_list(p):
     """
     node_list : bullet_list COMMA node_list
