@@ -39,8 +39,6 @@ tokens = (
     'DIRECTION',
 )
 
-
-
 t_WAVE_DASH = r'～'
 t_COMMA = r'、'
 t_HYPHEN = r'－'

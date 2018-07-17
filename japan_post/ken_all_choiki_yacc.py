@@ -384,7 +384,7 @@ def has_suffix(node: Node):
 parser = yacc.yacc()
 
 
-def parse_choiki(s):
+def parse(s):
     s = s.replace('種市第', '種市 第')
     s = s.replace('以上', ' 以上')
     s = s.replace('以下', ' 以下')
@@ -396,19 +396,3 @@ def parse_choiki(s):
     s = s.replace('号南', '号 南')
     lexer.parenthesis_depth = 0
     return parser.parse(s, lexer=lexer)
-
-
-if __name__ == '__main__':
-    ls = [
-        '１丁目',
-        '２丁目６５１',
-        '前川原２３２',
-        '前川原２３２～２４４',
-        '第２地割「７０～１３６」～第４地割「３～１１」',
-        '大江（２丁目６５１、６６２、６６８番地、３丁目１０３、１１８、２１０、２５４、２６７、３７２、４４４、４６９番地）',
-        '葛巻（第４０地割「５７番地１２５、１７６を除く」～第４５地割）',
-    ]
-    for s in ls:
-        lexer.parenthesis_depth = 0
-        ret = parser.parse(s, lexer=lexer)
-        print(ret)
