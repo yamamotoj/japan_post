@@ -205,3 +205,8 @@ class KenAllChoikiParserTest(unittest.TestCase):
         ret = ken_all_choiki_yacc.parse_choiki(s)
         self.assertEqual('新所・岡崎・梅田入会地', str(ret), s)
 
+    def test_choiki_parse038(self):
+        s = '玖珂町（番地のみ）'
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('玖珂町-番地', str(ret), s)
+

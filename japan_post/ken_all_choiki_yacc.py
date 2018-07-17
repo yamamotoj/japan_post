@@ -378,6 +378,7 @@ def parse_choiki(s):
     s = s.replace('以下', ' 以下')
     s = s.replace('以外', ' 以外')
     s = s.replace('を除く', ' を除く')
+    s = s.replace('番地のみ', '番地')
     s = s.replace('番地の', '番地 の')
     lexer.parenthesis_depth = 0
     return parser.parse(s, lexer=lexer)
