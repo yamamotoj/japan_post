@@ -303,9 +303,9 @@ def p_floow_string(p):
 
 def p_only_suffix_node(p):
     """
-    suffix_node : L_PAREN SUFFIX R_PAREN
+    suffix_node : SUFFIX
     """
-    p[0] = SuffixNode(p[2])
+    p[0] = SuffixNode(p[1])
 
 
 def p_error(p):

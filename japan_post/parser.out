@@ -38,7 +38,7 @@ Rule 32    string_node -> ID NUMBER SUFFIX
 Rule 33    string_node -> ID
 Rule 34    string_node -> string_node DOT ID
 Rule 35    string_node -> FLOOR BULLET FLOOR
-Rule 36    suffix_node -> L_PAREN SUFFIX R_PAREN
+Rule 36    suffix_node -> SUFFIX
 
 Terminals, with rules where they appear
 
@@ -50,10 +50,10 @@ EXCLUDE              : 3 4
 FLOOR                : 35 35
 HYPHEN               : 17 18
 ID                   : 31 32 33 34
-L_PAREN              : 2 3 4 11 36
+L_PAREN              : 2 3 4 11
 NUMBER               : 23 24 25 26 27 28 29 30 31 32
 PREFIX               : 23 24 25 30
-R_PAREN              : 2 3 4 11 36
+R_PAREN              : 2 3 4 11
 SUFFIX               : 24 25 26 27 32 36
 THEN                 : 14
 WAVE_DASH            : 7 15
@@ -110,22 +110,22 @@ state 0
     (33) string_node -> . ID
     (34) string_node -> . string_node DOT ID
     (35) string_node -> . FLOOR BULLET FLOOR
-    (36) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (36) suffix_node -> . SUFFIX
 
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
     ID              shift and go to state 12
     FLOOR           shift and go to state 13
-    L_PAREN         shift and go to state 5
+    SUFFIX          shift and go to state 11
 
     choiki                         shift and go to state 1
     node_list                      shift and go to state 2
     node                           shift and go to state 3
     bullet_list                    shift and go to state 4
-    range_node                     shift and go to state 6
-    num_node                       shift and go to state 7
-    string_node                    shift and go to state 8
-    suffix_node                    shift and go to state 9
+    range_node                     shift and go to state 5
+    num_node                       shift and go to state 6
+    string_node                    shift and go to state 7
+    suffix_node                    shift and go to state 8
 
 state 1
 
@@ -184,7 +184,7 @@ state 3
     (33) string_node -> . ID
     (34) string_node -> . string_node DOT ID
     (35) string_node -> . FLOOR BULLET FLOOR
-    (36) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (36) suffix_node -> . SUFFIX
 
   ! shift/reduce conflict for COMMA resolved as shift
   ! reduce/reduce conflict for $end resolved using rule 6 (node_list -> node .)
@@ -197,10 +197,11 @@ state 3
     L_PAREN         shift and go to state 16
     WAVE_DASH       shift and go to state 17
     BULLET          shift and go to state 19
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
     ID              shift and go to state 12
     FLOOR           shift and go to state 13
+    SUFFIX          shift and go to state 11
 
   ! COMMA           [ reduce using rule 13 (bullet_list -> node .) ]
   ! $end            [ reduce using rule 13 (bullet_list -> node .) ]
@@ -209,10 +210,10 @@ state 3
 
     node                           shift and go to state 14
     bullet_list                    shift and go to state 18
-    range_node                     shift and go to state 6
-    num_node                       shift and go to state 7
-    string_node                    shift and go to state 8
-    suffix_node                    shift and go to state 9
+    range_node                     shift and go to state 5
+    num_node                       shift and go to state 6
+    string_node                    shift and go to state 7
+    suffix_node                    shift and go to state 8
 
 state 4
 
@@ -227,13 +228,6 @@ state 4
 
 state 5
 
-    (36) suffix_node -> L_PAREN . SUFFIX R_PAREN
-
-    SUFFIX          shift and go to state 21
-
-
-state 6
-
     (19) node -> range_node .
 
     COMMA           reduce using rule 19 (node -> range_node .)
@@ -244,12 +238,13 @@ state 6
     NUMBER          reduce using rule 19 (node -> range_node .)
     ID              reduce using rule 19 (node -> range_node .)
     FLOOR           reduce using rule 19 (node -> range_node .)
+    SUFFIX          reduce using rule 19 (node -> range_node .)
     $end            reduce using rule 19 (node -> range_node .)
     R_PAREN         reduce using rule 19 (node -> range_node .)
     EXCLUDE         reduce using rule 19 (node -> range_node .)
 
 
-state 7
+state 6
 
     (20) node -> num_node .
     (14) num_node -> num_node . THEN num_node
@@ -263,14 +258,15 @@ state 7
     NUMBER          reduce using rule 20 (node -> num_node .)
     ID              reduce using rule 20 (node -> num_node .)
     FLOOR           reduce using rule 20 (node -> num_node .)
+    SUFFIX          reduce using rule 20 (node -> num_node .)
     $end            reduce using rule 20 (node -> num_node .)
     R_PAREN         reduce using rule 20 (node -> num_node .)
     EXCLUDE         reduce using rule 20 (node -> num_node .)
-    THEN            shift and go to state 22
-    HYPHEN          shift and go to state 23
+    THEN            shift and go to state 21
+    HYPHEN          shift and go to state 22
 
 
-state 8
+state 7
 
     (21) node -> string_node .
     (18) string_node -> string_node . HYPHEN num_node
@@ -284,14 +280,15 @@ state 8
     NUMBER          reduce using rule 21 (node -> string_node .)
     ID              reduce using rule 21 (node -> string_node .)
     FLOOR           reduce using rule 21 (node -> string_node .)
+    SUFFIX          reduce using rule 21 (node -> string_node .)
     $end            reduce using rule 21 (node -> string_node .)
     R_PAREN         reduce using rule 21 (node -> string_node .)
     EXCLUDE         reduce using rule 21 (node -> string_node .)
-    HYPHEN          shift and go to state 24
-    DOT             shift and go to state 25
+    HYPHEN          shift and go to state 23
+    DOT             shift and go to state 24
 
 
-state 9
+state 8
 
     (22) node -> suffix_node .
 
@@ -303,29 +300,31 @@ state 9
     NUMBER          reduce using rule 22 (node -> suffix_node .)
     ID              reduce using rule 22 (node -> suffix_node .)
     FLOOR           reduce using rule 22 (node -> suffix_node .)
+    SUFFIX          reduce using rule 22 (node -> suffix_node .)
     $end            reduce using rule 22 (node -> suffix_node .)
     R_PAREN         reduce using rule 22 (node -> suffix_node .)
     EXCLUDE         reduce using rule 22 (node -> suffix_node .)
 
 
-state 10
+state 9
 
     (23) num_node -> PREFIX . NUMBER
     (24) num_node -> PREFIX . NUMBER SUFFIX
     (25) num_node -> PREFIX . NUMBER SUFFIX COMPARATIVE_SUFFIX
     (30) num_node -> PREFIX . NUMBER COMPARATIVE_SUFFIX
 
-    NUMBER          shift and go to state 26
+    NUMBER          shift and go to state 25
 
 
-state 11
+state 10
 
     (26) num_node -> NUMBER . SUFFIX
     (27) num_node -> NUMBER . SUFFIX COMPARATIVE_SUFFIX
     (28) num_node -> NUMBER .
     (29) num_node -> NUMBER . COMPARATIVE_SUFFIX
 
-    SUFFIX          shift and go to state 27
+  ! shift/reduce conflict for SUFFIX resolved as shift
+    SUFFIX          shift and go to state 26
     THEN            reduce using rule 28 (num_node -> NUMBER .)
     HYPHEN          reduce using rule 28 (num_node -> NUMBER .)
     COMMA           reduce using rule 28 (num_node -> NUMBER .)
@@ -340,7 +339,27 @@ state 11
     R_PAREN         reduce using rule 28 (num_node -> NUMBER .)
     EXCLUDE         reduce using rule 28 (num_node -> NUMBER .)
     DOT             reduce using rule 28 (num_node -> NUMBER .)
-    COMPARATIVE_SUFFIX shift and go to state 28
+    COMPARATIVE_SUFFIX shift and go to state 27
+
+  ! SUFFIX          [ reduce using rule 28 (num_node -> NUMBER .) ]
+
+
+state 11
+
+    (36) suffix_node -> SUFFIX .
+
+    COMMA           reduce using rule 36 (suffix_node -> SUFFIX .)
+    L_PAREN         reduce using rule 36 (suffix_node -> SUFFIX .)
+    WAVE_DASH       reduce using rule 36 (suffix_node -> SUFFIX .)
+    BULLET          reduce using rule 36 (suffix_node -> SUFFIX .)
+    PREFIX          reduce using rule 36 (suffix_node -> SUFFIX .)
+    NUMBER          reduce using rule 36 (suffix_node -> SUFFIX .)
+    ID              reduce using rule 36 (suffix_node -> SUFFIX .)
+    FLOOR           reduce using rule 36 (suffix_node -> SUFFIX .)
+    SUFFIX          reduce using rule 36 (suffix_node -> SUFFIX .)
+    $end            reduce using rule 36 (suffix_node -> SUFFIX .)
+    R_PAREN         reduce using rule 36 (suffix_node -> SUFFIX .)
+    EXCLUDE         reduce using rule 36 (suffix_node -> SUFFIX .)
 
 
 state 12
@@ -350,7 +369,7 @@ state 12
     (33) string_node -> ID .
 
   ! shift/reduce conflict for NUMBER resolved as shift
-    NUMBER          shift and go to state 29
+    NUMBER          shift and go to state 28
     HYPHEN          reduce using rule 33 (string_node -> ID .)
     DOT             reduce using rule 33 (string_node -> ID .)
     COMMA           reduce using rule 33 (string_node -> ID .)
@@ -360,6 +379,7 @@ state 12
     PREFIX          reduce using rule 33 (string_node -> ID .)
     ID              reduce using rule 33 (string_node -> ID .)
     FLOOR           reduce using rule 33 (string_node -> ID .)
+    SUFFIX          reduce using rule 33 (string_node -> ID .)
     $end            reduce using rule 33 (string_node -> ID .)
     R_PAREN         reduce using rule 33 (string_node -> ID .)
     EXCLUDE         reduce using rule 33 (string_node -> ID .)
@@ -371,7 +391,7 @@ state 13
 
     (35) string_node -> FLOOR . BULLET FLOOR
 
-    BULLET          shift and go to state 30
+    BULLET          shift and go to state 29
 
 
 state 14
@@ -417,7 +437,7 @@ state 14
     (33) string_node -> . ID
     (34) string_node -> . string_node DOT ID
     (35) string_node -> . FLOOR BULLET FLOOR
-    (36) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (36) suffix_node -> . SUFFIX
 
   ! shift/reduce conflict for BULLET resolved as shift
   ! reduce/reduce conflict for COMMA resolved using rule 13 (bullet_list -> node .)
@@ -428,6 +448,7 @@ state 14
   ! reduce/reduce conflict for NUMBER resolved using rule 13 (bullet_list -> node .)
   ! reduce/reduce conflict for ID resolved using rule 13 (bullet_list -> node .)
   ! reduce/reduce conflict for FLOOR resolved using rule 13 (bullet_list -> node .)
+  ! reduce/reduce conflict for SUFFIX resolved using rule 13 (bullet_list -> node .)
   ! reduce/reduce conflict for $end resolved using rule 13 (bullet_list -> node .)
   ! reduce/reduce conflict for R_PAREN resolved using rule 13 (bullet_list -> node .)
   ! reduce/reduce conflict for EXCLUDE resolved using rule 13 (bullet_list -> node .)
@@ -437,6 +458,7 @@ state 14
   ! shift/reduce conflict for NUMBER resolved as shift
   ! shift/reduce conflict for ID resolved as shift
   ! shift/reduce conflict for FLOOR resolved as shift
+  ! shift/reduce conflict for SUFFIX resolved as shift
     BULLET          shift and go to state 19
     COMMA           reduce using rule 13 (bullet_list -> node .)
     $end            reduce using rule 13 (bullet_list -> node .)
@@ -444,10 +466,11 @@ state 14
     EXCLUDE         reduce using rule 13 (bullet_list -> node .)
     L_PAREN         shift and go to state 16
     WAVE_DASH       shift and go to state 17
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
     ID              shift and go to state 12
     FLOOR           shift and go to state 13
+    SUFFIX          shift and go to state 11
 
   ! COMMA           [ reduce using rule 16 (node -> node node .) ]
   ! L_PAREN         [ reduce using rule 16 (node -> node node .) ]
@@ -457,6 +480,7 @@ state 14
   ! NUMBER          [ reduce using rule 16 (node -> node node .) ]
   ! ID              [ reduce using rule 16 (node -> node node .) ]
   ! FLOOR           [ reduce using rule 16 (node -> node node .) ]
+  ! SUFFIX          [ reduce using rule 16 (node -> node node .) ]
   ! $end            [ reduce using rule 16 (node -> node node .) ]
   ! R_PAREN         [ reduce using rule 16 (node -> node node .) ]
   ! EXCLUDE         [ reduce using rule 16 (node -> node node .) ]
@@ -467,13 +491,14 @@ state 14
   ! NUMBER          [ reduce using rule 13 (bullet_list -> node .) ]
   ! ID              [ reduce using rule 13 (bullet_list -> node .) ]
   ! FLOOR           [ reduce using rule 13 (bullet_list -> node .) ]
+  ! SUFFIX          [ reduce using rule 13 (bullet_list -> node .) ]
 
     node                           shift and go to state 14
     bullet_list                    shift and go to state 18
-    range_node                     shift and go to state 6
-    num_node                       shift and go to state 7
-    string_node                    shift and go to state 8
-    suffix_node                    shift and go to state 9
+    range_node                     shift and go to state 5
+    num_node                       shift and go to state 6
+    string_node                    shift and go to state 7
+    suffix_node                    shift and go to state 8
 
 state 15
 
@@ -512,21 +537,21 @@ state 15
     (33) string_node -> . ID
     (34) string_node -> . string_node DOT ID
     (35) string_node -> . FLOOR BULLET FLOOR
-    (36) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (36) suffix_node -> . SUFFIX
 
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
     ID              shift and go to state 12
     FLOOR           shift and go to state 13
-    L_PAREN         shift and go to state 5
+    SUFFIX          shift and go to state 11
 
     node                           shift and go to state 3
-    node_list                      shift and go to state 31
+    node_list                      shift and go to state 30
     bullet_list                    shift and go to state 4
-    range_node                     shift and go to state 6
-    num_node                       shift and go to state 7
-    string_node                    shift and go to state 8
-    suffix_node                    shift and go to state 9
+    range_node                     shift and go to state 5
+    num_node                       shift and go to state 6
+    string_node                    shift and go to state 7
+    suffix_node                    shift and go to state 8
 
 state 16
 
@@ -534,7 +559,6 @@ state 16
     (3) node -> node L_PAREN . node_list EXCLUDE R_PAREN
     (4) node -> node L_PAREN . node_list R_PAREN EXCLUDE
     (11) node -> node L_PAREN . bullet_list R_PAREN
-    (36) suffix_node -> L_PAREN . SUFFIX R_PAREN
     (5) node_list -> . node COMMA node_list
     (6) node_list -> . node
     (8) node_list -> . bullet_list COMMA node_list
@@ -569,22 +593,21 @@ state 16
     (33) string_node -> . ID
     (34) string_node -> . string_node DOT ID
     (35) string_node -> . FLOOR BULLET FLOOR
-    (36) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (36) suffix_node -> . SUFFIX
 
-    SUFFIX          shift and go to state 21
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
     ID              shift and go to state 12
     FLOOR           shift and go to state 13
-    L_PAREN         shift and go to state 5
+    SUFFIX          shift and go to state 11
 
-    node                           shift and go to state 32
-    node_list                      shift and go to state 33
-    bullet_list                    shift and go to state 34
-    range_node                     shift and go to state 6
-    num_node                       shift and go to state 7
-    string_node                    shift and go to state 8
-    suffix_node                    shift and go to state 9
+    node                           shift and go to state 31
+    node_list                      shift and go to state 32
+    bullet_list                    shift and go to state 33
+    range_node                     shift and go to state 5
+    num_node                       shift and go to state 6
+    string_node                    shift and go to state 7
+    suffix_node                    shift and go to state 8
 
 state 17
 
@@ -618,36 +641,37 @@ state 17
     (33) string_node -> . ID
     (34) string_node -> . string_node DOT ID
     (35) string_node -> . FLOOR BULLET FLOOR
-    (36) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (36) suffix_node -> . SUFFIX
 
   ! shift/reduce conflict for PREFIX resolved as shift
   ! shift/reduce conflict for NUMBER resolved as shift
   ! shift/reduce conflict for ID resolved as shift
   ! shift/reduce conflict for FLOOR resolved as shift
-  ! shift/reduce conflict for L_PAREN resolved as shift
+  ! shift/reduce conflict for SUFFIX resolved as shift
     COMMA           reduce using rule 7 (node -> node WAVE_DASH .)
+    L_PAREN         reduce using rule 7 (node -> node WAVE_DASH .)
     WAVE_DASH       reduce using rule 7 (node -> node WAVE_DASH .)
     BULLET          reduce using rule 7 (node -> node WAVE_DASH .)
     $end            reduce using rule 7 (node -> node WAVE_DASH .)
     R_PAREN         reduce using rule 7 (node -> node WAVE_DASH .)
     EXCLUDE         reduce using rule 7 (node -> node WAVE_DASH .)
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
     ID              shift and go to state 12
     FLOOR           shift and go to state 13
-    L_PAREN         shift and go to state 5
+    SUFFIX          shift and go to state 11
 
-  ! L_PAREN         [ reduce using rule 7 (node -> node WAVE_DASH .) ]
   ! PREFIX          [ reduce using rule 7 (node -> node WAVE_DASH .) ]
   ! NUMBER          [ reduce using rule 7 (node -> node WAVE_DASH .) ]
   ! ID              [ reduce using rule 7 (node -> node WAVE_DASH .) ]
   ! FLOOR           [ reduce using rule 7 (node -> node WAVE_DASH .) ]
+  ! SUFFIX          [ reduce using rule 7 (node -> node WAVE_DASH .) ]
 
-    node                           shift and go to state 35
-    range_node                     shift and go to state 6
-    num_node                       shift and go to state 7
-    string_node                    shift and go to state 8
-    suffix_node                    shift and go to state 9
+    node                           shift and go to state 34
+    range_node                     shift and go to state 5
+    num_node                       shift and go to state 6
+    string_node                    shift and go to state 7
+    suffix_node                    shift and go to state 8
 
 state 18
 
@@ -661,6 +685,7 @@ state 18
     NUMBER          reduce using rule 10 (node -> node bullet_list .)
     ID              reduce using rule 10 (node -> node bullet_list .)
     FLOOR           reduce using rule 10 (node -> node bullet_list .)
+    SUFFIX          reduce using rule 10 (node -> node bullet_list .)
     $end            reduce using rule 10 (node -> node bullet_list .)
     R_PAREN         reduce using rule 10 (node -> node bullet_list .)
     EXCLUDE         reduce using rule 10 (node -> node bullet_list .)
@@ -699,20 +724,20 @@ state 19
     (33) string_node -> . ID
     (34) string_node -> . string_node DOT ID
     (35) string_node -> . FLOOR BULLET FLOOR
-    (36) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (36) suffix_node -> . SUFFIX
 
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
     ID              shift and go to state 12
     FLOOR           shift and go to state 13
-    L_PAREN         shift and go to state 5
+    SUFFIX          shift and go to state 11
 
-    node                           shift and go to state 36
-    bullet_list                    shift and go to state 37
-    range_node                     shift and go to state 6
-    num_node                       shift and go to state 7
-    string_node                    shift and go to state 8
-    suffix_node                    shift and go to state 9
+    node                           shift and go to state 35
+    bullet_list                    shift and go to state 36
+    range_node                     shift and go to state 5
+    num_node                       shift and go to state 6
+    string_node                    shift and go to state 7
+    suffix_node                    shift and go to state 8
 
 state 20
 
@@ -751,30 +776,23 @@ state 20
     (33) string_node -> . ID
     (34) string_node -> . string_node DOT ID
     (35) string_node -> . FLOOR BULLET FLOOR
-    (36) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (36) suffix_node -> . SUFFIX
 
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
     ID              shift and go to state 12
     FLOOR           shift and go to state 13
-    L_PAREN         shift and go to state 5
+    SUFFIX          shift and go to state 11
 
     bullet_list                    shift and go to state 4
-    node_list                      shift and go to state 38
+    node_list                      shift and go to state 37
     node                           shift and go to state 3
-    range_node                     shift and go to state 6
-    num_node                       shift and go to state 7
-    string_node                    shift and go to state 8
-    suffix_node                    shift and go to state 9
+    range_node                     shift and go to state 5
+    num_node                       shift and go to state 6
+    string_node                    shift and go to state 7
+    suffix_node                    shift and go to state 8
 
 state 21
-
-    (36) suffix_node -> L_PAREN SUFFIX . R_PAREN
-
-    R_PAREN         shift and go to state 39
-
-
-state 22
 
     (14) num_node -> num_node THEN . num_node
     (14) num_node -> . num_node THEN num_node
@@ -788,12 +806,12 @@ state 22
     (29) num_node -> . NUMBER COMPARATIVE_SUFFIX
     (30) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
 
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
 
-    num_node                       shift and go to state 40
+    num_node                       shift and go to state 38
 
-state 23
+state 22
 
     (17) num_node -> num_node HYPHEN . num_node
     (14) num_node -> . num_node THEN num_node
@@ -807,12 +825,12 @@ state 23
     (29) num_node -> . NUMBER COMPARATIVE_SUFFIX
     (30) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
 
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
 
-    num_node                       shift and go to state 41
+    num_node                       shift and go to state 39
 
-state 24
+state 23
 
     (18) string_node -> string_node HYPHEN . num_node
     (14) num_node -> . num_node THEN num_node
@@ -826,25 +844,26 @@ state 24
     (29) num_node -> . NUMBER COMPARATIVE_SUFFIX
     (30) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
 
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
 
-    num_node                       shift and go to state 42
+    num_node                       shift and go to state 40
 
-state 25
+state 24
 
     (34) string_node -> string_node DOT . ID
 
-    ID              shift and go to state 43
+    ID              shift and go to state 41
 
 
-state 26
+state 25
 
     (23) num_node -> PREFIX NUMBER .
     (24) num_node -> PREFIX NUMBER . SUFFIX
     (25) num_node -> PREFIX NUMBER . SUFFIX COMPARATIVE_SUFFIX
     (30) num_node -> PREFIX NUMBER . COMPARATIVE_SUFFIX
 
+  ! shift/reduce conflict for SUFFIX resolved as shift
     THEN            reduce using rule 23 (num_node -> PREFIX NUMBER .)
     HYPHEN          reduce using rule 23 (num_node -> PREFIX NUMBER .)
     COMMA           reduce using rule 23 (num_node -> PREFIX NUMBER .)
@@ -859,11 +878,13 @@ state 26
     R_PAREN         reduce using rule 23 (num_node -> PREFIX NUMBER .)
     EXCLUDE         reduce using rule 23 (num_node -> PREFIX NUMBER .)
     DOT             reduce using rule 23 (num_node -> PREFIX NUMBER .)
-    SUFFIX          shift and go to state 44
-    COMPARATIVE_SUFFIX shift and go to state 45
+    SUFFIX          shift and go to state 42
+    COMPARATIVE_SUFFIX shift and go to state 43
+
+  ! SUFFIX          [ reduce using rule 23 (num_node -> PREFIX NUMBER .) ]
 
 
-state 27
+state 26
 
     (26) num_node -> NUMBER SUFFIX .
     (27) num_node -> NUMBER SUFFIX . COMPARATIVE_SUFFIX
@@ -878,14 +899,15 @@ state 27
     NUMBER          reduce using rule 26 (num_node -> NUMBER SUFFIX .)
     ID              reduce using rule 26 (num_node -> NUMBER SUFFIX .)
     FLOOR           reduce using rule 26 (num_node -> NUMBER SUFFIX .)
+    SUFFIX          reduce using rule 26 (num_node -> NUMBER SUFFIX .)
     $end            reduce using rule 26 (num_node -> NUMBER SUFFIX .)
     R_PAREN         reduce using rule 26 (num_node -> NUMBER SUFFIX .)
     EXCLUDE         reduce using rule 26 (num_node -> NUMBER SUFFIX .)
     DOT             reduce using rule 26 (num_node -> NUMBER SUFFIX .)
-    COMPARATIVE_SUFFIX shift and go to state 46
+    COMPARATIVE_SUFFIX shift and go to state 44
 
 
-state 28
+state 27
 
     (29) num_node -> NUMBER COMPARATIVE_SUFFIX .
 
@@ -899,17 +921,19 @@ state 28
     NUMBER          reduce using rule 29 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
     ID              reduce using rule 29 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
     FLOOR           reduce using rule 29 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    SUFFIX          reduce using rule 29 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
     $end            reduce using rule 29 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
     R_PAREN         reduce using rule 29 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
     EXCLUDE         reduce using rule 29 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
     DOT             reduce using rule 29 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
 
 
-state 29
+state 28
 
     (31) string_node -> ID NUMBER .
     (32) string_node -> ID NUMBER . SUFFIX
 
+  ! shift/reduce conflict for SUFFIX resolved as shift
     HYPHEN          reduce using rule 31 (string_node -> ID NUMBER .)
     DOT             reduce using rule 31 (string_node -> ID NUMBER .)
     COMMA           reduce using rule 31 (string_node -> ID NUMBER .)
@@ -923,17 +947,19 @@ state 29
     $end            reduce using rule 31 (string_node -> ID NUMBER .)
     R_PAREN         reduce using rule 31 (string_node -> ID NUMBER .)
     EXCLUDE         reduce using rule 31 (string_node -> ID NUMBER .)
-    SUFFIX          shift and go to state 47
+    SUFFIX          shift and go to state 45
+
+  ! SUFFIX          [ reduce using rule 31 (string_node -> ID NUMBER .) ]
 
 
-state 30
+state 29
 
     (35) string_node -> FLOOR BULLET . FLOOR
 
-    FLOOR           shift and go to state 48
+    FLOOR           shift and go to state 46
 
 
-state 31
+state 30
 
     (5) node_list -> node COMMA node_list .
 
@@ -942,7 +968,7 @@ state 31
     EXCLUDE         reduce using rule 5 (node_list -> node COMMA node_list .)
 
 
-state 32
+state 31
 
     (5) node_list -> node . COMMA node_list
     (6) node_list -> node .
@@ -986,7 +1012,7 @@ state 32
     (33) string_node -> . ID
     (34) string_node -> . string_node DOT ID
     (35) string_node -> . FLOOR BULLET FLOOR
-    (36) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (36) suffix_node -> . SUFFIX
 
   ! reduce/reduce conflict for R_PAREN resolved using rule 6 (node_list -> node .)
   ! shift/reduce conflict for COMMA resolved as shift
@@ -997,10 +1023,11 @@ state 32
     BULLET          shift and go to state 19
     L_PAREN         shift and go to state 16
     WAVE_DASH       shift and go to state 17
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
     ID              shift and go to state 12
     FLOOR           shift and go to state 13
+    SUFFIX          shift and go to state 11
 
   ! R_PAREN         [ reduce using rule 13 (bullet_list -> node .) ]
   ! COMMA           [ reduce using rule 13 (bullet_list -> node .) ]
@@ -1008,36 +1035,36 @@ state 32
 
     node                           shift and go to state 14
     bullet_list                    shift and go to state 18
-    range_node                     shift and go to state 6
-    num_node                       shift and go to state 7
-    string_node                    shift and go to state 8
-    suffix_node                    shift and go to state 9
+    range_node                     shift and go to state 5
+    num_node                       shift and go to state 6
+    string_node                    shift and go to state 7
+    suffix_node                    shift and go to state 8
 
-state 33
+state 32
 
     (2) node -> node L_PAREN node_list . R_PAREN
     (3) node -> node L_PAREN node_list . EXCLUDE R_PAREN
     (4) node -> node L_PAREN node_list . R_PAREN EXCLUDE
 
-    R_PAREN         shift and go to state 49
-    EXCLUDE         shift and go to state 50
+    R_PAREN         shift and go to state 47
+    EXCLUDE         shift and go to state 48
 
 
-state 34
+state 33
 
     (11) node -> node L_PAREN bullet_list . R_PAREN
     (8) node_list -> bullet_list . COMMA node_list
     (9) node_list -> bullet_list .
 
   ! shift/reduce conflict for R_PAREN resolved as shift
-    R_PAREN         shift and go to state 51
+    R_PAREN         shift and go to state 49
     COMMA           shift and go to state 20
     EXCLUDE         reduce using rule 9 (node_list -> bullet_list .)
 
   ! R_PAREN         [ reduce using rule 9 (node_list -> bullet_list .) ]
 
 
-state 35
+state 34
 
     (15) range_node -> node WAVE_DASH node .
     (2) node -> node . L_PAREN node_list R_PAREN
@@ -1078,7 +1105,7 @@ state 35
     (33) string_node -> . ID
     (34) string_node -> . string_node DOT ID
     (35) string_node -> . FLOOR BULLET FLOOR
-    (36) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (36) suffix_node -> . SUFFIX
 
   ! shift/reduce conflict for L_PAREN resolved as shift
   ! shift/reduce conflict for WAVE_DASH resolved as shift
@@ -1086,6 +1113,7 @@ state 35
   ! shift/reduce conflict for NUMBER resolved as shift
   ! shift/reduce conflict for ID resolved as shift
   ! shift/reduce conflict for FLOOR resolved as shift
+  ! shift/reduce conflict for SUFFIX resolved as shift
     COMMA           reduce using rule 15 (range_node -> node WAVE_DASH node .)
     BULLET          reduce using rule 15 (range_node -> node WAVE_DASH node .)
     $end            reduce using rule 15 (range_node -> node WAVE_DASH node .)
@@ -1093,10 +1121,11 @@ state 35
     EXCLUDE         reduce using rule 15 (range_node -> node WAVE_DASH node .)
     L_PAREN         shift and go to state 16
     WAVE_DASH       shift and go to state 17
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
     ID              shift and go to state 12
     FLOOR           shift and go to state 13
+    SUFFIX          shift and go to state 11
 
   ! L_PAREN         [ reduce using rule 15 (range_node -> node WAVE_DASH node .) ]
   ! WAVE_DASH       [ reduce using rule 15 (range_node -> node WAVE_DASH node .) ]
@@ -1104,15 +1133,16 @@ state 35
   ! NUMBER          [ reduce using rule 15 (range_node -> node WAVE_DASH node .) ]
   ! ID              [ reduce using rule 15 (range_node -> node WAVE_DASH node .) ]
   ! FLOOR           [ reduce using rule 15 (range_node -> node WAVE_DASH node .) ]
+  ! SUFFIX          [ reduce using rule 15 (range_node -> node WAVE_DASH node .) ]
 
     node                           shift and go to state 14
     bullet_list                    shift and go to state 18
-    range_node                     shift and go to state 6
-    num_node                       shift and go to state 7
-    string_node                    shift and go to state 8
-    suffix_node                    shift and go to state 9
+    range_node                     shift and go to state 5
+    num_node                       shift and go to state 6
+    string_node                    shift and go to state 7
+    suffix_node                    shift and go to state 8
 
-state 36
+state 35
 
     (12) bullet_list -> node . BULLET bullet_list
     (13) bullet_list -> node .
@@ -1154,7 +1184,7 @@ state 36
     (33) string_node -> . ID
     (34) string_node -> . string_node DOT ID
     (35) string_node -> . FLOOR BULLET FLOOR
-    (36) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (36) suffix_node -> . SUFFIX
 
   ! shift/reduce conflict for BULLET resolved as shift
   ! shift/reduce conflict for L_PAREN resolved as shift
@@ -1163,6 +1193,7 @@ state 36
   ! shift/reduce conflict for NUMBER resolved as shift
   ! shift/reduce conflict for ID resolved as shift
   ! shift/reduce conflict for FLOOR resolved as shift
+  ! shift/reduce conflict for SUFFIX resolved as shift
     BULLET          shift and go to state 19
     COMMA           reduce using rule 13 (bullet_list -> node .)
     $end            reduce using rule 13 (bullet_list -> node .)
@@ -1170,10 +1201,11 @@ state 36
     EXCLUDE         reduce using rule 13 (bullet_list -> node .)
     L_PAREN         shift and go to state 16
     WAVE_DASH       shift and go to state 17
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
+    PREFIX          shift and go to state 9
+    NUMBER          shift and go to state 10
     ID              shift and go to state 12
     FLOOR           shift and go to state 13
+    SUFFIX          shift and go to state 11
 
   ! L_PAREN         [ reduce using rule 13 (bullet_list -> node .) ]
   ! WAVE_DASH       [ reduce using rule 13 (bullet_list -> node .) ]
@@ -1182,15 +1214,16 @@ state 36
   ! NUMBER          [ reduce using rule 13 (bullet_list -> node .) ]
   ! ID              [ reduce using rule 13 (bullet_list -> node .) ]
   ! FLOOR           [ reduce using rule 13 (bullet_list -> node .) ]
+  ! SUFFIX          [ reduce using rule 13 (bullet_list -> node .) ]
 
     node                           shift and go to state 14
     bullet_list                    shift and go to state 18
-    range_node                     shift and go to state 6
-    num_node                       shift and go to state 7
-    string_node                    shift and go to state 8
-    suffix_node                    shift and go to state 9
+    range_node                     shift and go to state 5
+    num_node                       shift and go to state 6
+    string_node                    shift and go to state 7
+    suffix_node                    shift and go to state 8
 
-state 37
+state 36
 
     (12) bullet_list -> node BULLET bullet_list .
 
@@ -1203,11 +1236,12 @@ state 37
     NUMBER          reduce using rule 12 (bullet_list -> node BULLET bullet_list .)
     ID              reduce using rule 12 (bullet_list -> node BULLET bullet_list .)
     FLOOR           reduce using rule 12 (bullet_list -> node BULLET bullet_list .)
+    SUFFIX          reduce using rule 12 (bullet_list -> node BULLET bullet_list .)
     R_PAREN         reduce using rule 12 (bullet_list -> node BULLET bullet_list .)
     EXCLUDE         reduce using rule 12 (bullet_list -> node BULLET bullet_list .)
 
 
-state 38
+state 37
 
     (8) node_list -> bullet_list COMMA node_list .
 
@@ -1216,24 +1250,7 @@ state 38
     EXCLUDE         reduce using rule 8 (node_list -> bullet_list COMMA node_list .)
 
 
-state 39
-
-    (36) suffix_node -> L_PAREN SUFFIX R_PAREN .
-
-    COMMA           reduce using rule 36 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    L_PAREN         reduce using rule 36 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    WAVE_DASH       reduce using rule 36 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    BULLET          reduce using rule 36 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    PREFIX          reduce using rule 36 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    NUMBER          reduce using rule 36 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    ID              reduce using rule 36 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    FLOOR           reduce using rule 36 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    $end            reduce using rule 36 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    R_PAREN         reduce using rule 36 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    EXCLUDE         reduce using rule 36 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-
-
-state 40
+state 38
 
     (14) num_node -> num_node THEN num_node .
     (14) num_node -> num_node . THEN num_node
@@ -1249,18 +1266,19 @@ state 40
     NUMBER          reduce using rule 14 (num_node -> num_node THEN num_node .)
     ID              reduce using rule 14 (num_node -> num_node THEN num_node .)
     FLOOR           reduce using rule 14 (num_node -> num_node THEN num_node .)
+    SUFFIX          reduce using rule 14 (num_node -> num_node THEN num_node .)
     $end            reduce using rule 14 (num_node -> num_node THEN num_node .)
     R_PAREN         reduce using rule 14 (num_node -> num_node THEN num_node .)
     EXCLUDE         reduce using rule 14 (num_node -> num_node THEN num_node .)
     DOT             reduce using rule 14 (num_node -> num_node THEN num_node .)
-    THEN            shift and go to state 22
-    HYPHEN          shift and go to state 23
+    THEN            shift and go to state 21
+    HYPHEN          shift and go to state 22
 
   ! THEN            [ reduce using rule 14 (num_node -> num_node THEN num_node .) ]
   ! HYPHEN          [ reduce using rule 14 (num_node -> num_node THEN num_node .) ]
 
 
-state 41
+state 39
 
     (17) num_node -> num_node HYPHEN num_node .
     (14) num_node -> num_node . THEN num_node
@@ -1276,18 +1294,19 @@ state 41
     NUMBER          reduce using rule 17 (num_node -> num_node HYPHEN num_node .)
     ID              reduce using rule 17 (num_node -> num_node HYPHEN num_node .)
     FLOOR           reduce using rule 17 (num_node -> num_node HYPHEN num_node .)
+    SUFFIX          reduce using rule 17 (num_node -> num_node HYPHEN num_node .)
     $end            reduce using rule 17 (num_node -> num_node HYPHEN num_node .)
     R_PAREN         reduce using rule 17 (num_node -> num_node HYPHEN num_node .)
     EXCLUDE         reduce using rule 17 (num_node -> num_node HYPHEN num_node .)
     DOT             reduce using rule 17 (num_node -> num_node HYPHEN num_node .)
-    THEN            shift and go to state 22
-    HYPHEN          shift and go to state 23
+    THEN            shift and go to state 21
+    HYPHEN          shift and go to state 22
 
   ! THEN            [ reduce using rule 17 (num_node -> num_node HYPHEN num_node .) ]
   ! HYPHEN          [ reduce using rule 17 (num_node -> num_node HYPHEN num_node .) ]
 
 
-state 42
+state 40
 
     (18) string_node -> string_node HYPHEN num_node .
     (14) num_node -> num_node . THEN num_node
@@ -1303,16 +1322,17 @@ state 42
     NUMBER          reduce using rule 18 (string_node -> string_node HYPHEN num_node .)
     ID              reduce using rule 18 (string_node -> string_node HYPHEN num_node .)
     FLOOR           reduce using rule 18 (string_node -> string_node HYPHEN num_node .)
+    SUFFIX          reduce using rule 18 (string_node -> string_node HYPHEN num_node .)
     $end            reduce using rule 18 (string_node -> string_node HYPHEN num_node .)
     R_PAREN         reduce using rule 18 (string_node -> string_node HYPHEN num_node .)
     EXCLUDE         reduce using rule 18 (string_node -> string_node HYPHEN num_node .)
-    THEN            shift and go to state 22
-    HYPHEN          shift and go to state 23
+    THEN            shift and go to state 21
+    HYPHEN          shift and go to state 22
 
   ! HYPHEN          [ reduce using rule 18 (string_node -> string_node HYPHEN num_node .) ]
 
 
-state 43
+state 41
 
     (34) string_node -> string_node DOT ID .
 
@@ -1326,12 +1346,13 @@ state 43
     NUMBER          reduce using rule 34 (string_node -> string_node DOT ID .)
     ID              reduce using rule 34 (string_node -> string_node DOT ID .)
     FLOOR           reduce using rule 34 (string_node -> string_node DOT ID .)
+    SUFFIX          reduce using rule 34 (string_node -> string_node DOT ID .)
     $end            reduce using rule 34 (string_node -> string_node DOT ID .)
     R_PAREN         reduce using rule 34 (string_node -> string_node DOT ID .)
     EXCLUDE         reduce using rule 34 (string_node -> string_node DOT ID .)
 
 
-state 44
+state 42
 
     (24) num_node -> PREFIX NUMBER SUFFIX .
     (25) num_node -> PREFIX NUMBER SUFFIX . COMPARATIVE_SUFFIX
@@ -1346,14 +1367,15 @@ state 44
     NUMBER          reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX .)
     ID              reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX .)
     FLOOR           reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX .)
+    SUFFIX          reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX .)
     $end            reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX .)
     R_PAREN         reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX .)
     EXCLUDE         reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX .)
     DOT             reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX .)
-    COMPARATIVE_SUFFIX shift and go to state 52
+    COMPARATIVE_SUFFIX shift and go to state 50
 
 
-state 45
+state 43
 
     (30) num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .
 
@@ -1367,13 +1389,14 @@ state 45
     NUMBER          reduce using rule 30 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
     ID              reduce using rule 30 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
     FLOOR           reduce using rule 30 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    SUFFIX          reduce using rule 30 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
     $end            reduce using rule 30 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
     R_PAREN         reduce using rule 30 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
     EXCLUDE         reduce using rule 30 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
     DOT             reduce using rule 30 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
 
 
-state 46
+state 44
 
     (27) num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .
 
@@ -1387,13 +1410,14 @@ state 46
     NUMBER          reduce using rule 27 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
     ID              reduce using rule 27 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
     FLOOR           reduce using rule 27 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    SUFFIX          reduce using rule 27 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
     $end            reduce using rule 27 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
     R_PAREN         reduce using rule 27 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
     EXCLUDE         reduce using rule 27 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
     DOT             reduce using rule 27 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
 
 
-state 47
+state 45
 
     (32) string_node -> ID NUMBER SUFFIX .
 
@@ -1407,12 +1431,13 @@ state 47
     NUMBER          reduce using rule 32 (string_node -> ID NUMBER SUFFIX .)
     ID              reduce using rule 32 (string_node -> ID NUMBER SUFFIX .)
     FLOOR           reduce using rule 32 (string_node -> ID NUMBER SUFFIX .)
+    SUFFIX          reduce using rule 32 (string_node -> ID NUMBER SUFFIX .)
     $end            reduce using rule 32 (string_node -> ID NUMBER SUFFIX .)
     R_PAREN         reduce using rule 32 (string_node -> ID NUMBER SUFFIX .)
     EXCLUDE         reduce using rule 32 (string_node -> ID NUMBER SUFFIX .)
 
 
-state 48
+state 46
 
     (35) string_node -> FLOOR BULLET FLOOR .
 
@@ -1426,12 +1451,13 @@ state 48
     NUMBER          reduce using rule 35 (string_node -> FLOOR BULLET FLOOR .)
     ID              reduce using rule 35 (string_node -> FLOOR BULLET FLOOR .)
     FLOOR           reduce using rule 35 (string_node -> FLOOR BULLET FLOOR .)
+    SUFFIX          reduce using rule 35 (string_node -> FLOOR BULLET FLOOR .)
     $end            reduce using rule 35 (string_node -> FLOOR BULLET FLOOR .)
     R_PAREN         reduce using rule 35 (string_node -> FLOOR BULLET FLOOR .)
     EXCLUDE         reduce using rule 35 (string_node -> FLOOR BULLET FLOOR .)
 
 
-state 49
+state 47
 
     (2) node -> node L_PAREN node_list R_PAREN .
     (4) node -> node L_PAREN node_list R_PAREN . EXCLUDE
@@ -1445,21 +1471,22 @@ state 49
     NUMBER          reduce using rule 2 (node -> node L_PAREN node_list R_PAREN .)
     ID              reduce using rule 2 (node -> node L_PAREN node_list R_PAREN .)
     FLOOR           reduce using rule 2 (node -> node L_PAREN node_list R_PAREN .)
+    SUFFIX          reduce using rule 2 (node -> node L_PAREN node_list R_PAREN .)
     $end            reduce using rule 2 (node -> node L_PAREN node_list R_PAREN .)
     R_PAREN         reduce using rule 2 (node -> node L_PAREN node_list R_PAREN .)
-    EXCLUDE         shift and go to state 53
+    EXCLUDE         shift and go to state 51
 
   ! EXCLUDE         [ reduce using rule 2 (node -> node L_PAREN node_list R_PAREN .) ]
 
 
-state 50
+state 48
 
     (3) node -> node L_PAREN node_list EXCLUDE . R_PAREN
 
-    R_PAREN         shift and go to state 54
+    R_PAREN         shift and go to state 52
 
 
-state 51
+state 49
 
     (11) node -> node L_PAREN bullet_list R_PAREN .
 
@@ -1471,12 +1498,13 @@ state 51
     NUMBER          reduce using rule 11 (node -> node L_PAREN bullet_list R_PAREN .)
     ID              reduce using rule 11 (node -> node L_PAREN bullet_list R_PAREN .)
     FLOOR           reduce using rule 11 (node -> node L_PAREN bullet_list R_PAREN .)
+    SUFFIX          reduce using rule 11 (node -> node L_PAREN bullet_list R_PAREN .)
     $end            reduce using rule 11 (node -> node L_PAREN bullet_list R_PAREN .)
     R_PAREN         reduce using rule 11 (node -> node L_PAREN bullet_list R_PAREN .)
     EXCLUDE         reduce using rule 11 (node -> node L_PAREN bullet_list R_PAREN .)
 
 
-state 52
+state 50
 
     (25) num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .
 
@@ -1490,13 +1518,14 @@ state 52
     NUMBER          reduce using rule 25 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
     ID              reduce using rule 25 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
     FLOOR           reduce using rule 25 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    SUFFIX          reduce using rule 25 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
     $end            reduce using rule 25 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
     R_PAREN         reduce using rule 25 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
     EXCLUDE         reduce using rule 25 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
     DOT             reduce using rule 25 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
 
 
-state 53
+state 51
 
     (4) node -> node L_PAREN node_list R_PAREN EXCLUDE .
 
@@ -1508,12 +1537,13 @@ state 53
     NUMBER          reduce using rule 4 (node -> node L_PAREN node_list R_PAREN EXCLUDE .)
     ID              reduce using rule 4 (node -> node L_PAREN node_list R_PAREN EXCLUDE .)
     FLOOR           reduce using rule 4 (node -> node L_PAREN node_list R_PAREN EXCLUDE .)
+    SUFFIX          reduce using rule 4 (node -> node L_PAREN node_list R_PAREN EXCLUDE .)
     $end            reduce using rule 4 (node -> node L_PAREN node_list R_PAREN EXCLUDE .)
     R_PAREN         reduce using rule 4 (node -> node L_PAREN node_list R_PAREN EXCLUDE .)
     EXCLUDE         reduce using rule 4 (node -> node L_PAREN node_list R_PAREN EXCLUDE .)
 
 
-state 54
+state 52
 
     (3) node -> node L_PAREN node_list EXCLUDE R_PAREN .
 
@@ -1525,6 +1555,7 @@ state 54
     NUMBER          reduce using rule 3 (node -> node L_PAREN node_list EXCLUDE R_PAREN .)
     ID              reduce using rule 3 (node -> node L_PAREN node_list EXCLUDE R_PAREN .)
     FLOOR           reduce using rule 3 (node -> node L_PAREN node_list EXCLUDE R_PAREN .)
+    SUFFIX          reduce using rule 3 (node -> node L_PAREN node_list EXCLUDE R_PAREN .)
     $end            reduce using rule 3 (node -> node L_PAREN node_list EXCLUDE R_PAREN .)
     R_PAREN         reduce using rule 3 (node -> node L_PAREN node_list EXCLUDE R_PAREN .)
     EXCLUDE         reduce using rule 3 (node -> node L_PAREN node_list EXCLUDE R_PAREN .)
@@ -1533,6 +1564,7 @@ WARNING:
 WARNING: Conflicts:
 WARNING: 
 WARNING: shift/reduce conflict for COMMA in state 3 resolved as shift
+WARNING: shift/reduce conflict for SUFFIX in state 10 resolved as shift
 WARNING: shift/reduce conflict for NUMBER in state 12 resolved as shift
 WARNING: shift/reduce conflict for BULLET in state 14 resolved as shift
 WARNING: shift/reduce conflict for BULLET in state 14 resolved as shift
@@ -1542,36 +1574,41 @@ WARNING: shift/reduce conflict for PREFIX in state 14 resolved as shift
 WARNING: shift/reduce conflict for NUMBER in state 14 resolved as shift
 WARNING: shift/reduce conflict for ID in state 14 resolved as shift
 WARNING: shift/reduce conflict for FLOOR in state 14 resolved as shift
+WARNING: shift/reduce conflict for SUFFIX in state 14 resolved as shift
 WARNING: shift/reduce conflict for PREFIX in state 17 resolved as shift
 WARNING: shift/reduce conflict for NUMBER in state 17 resolved as shift
 WARNING: shift/reduce conflict for ID in state 17 resolved as shift
 WARNING: shift/reduce conflict for FLOOR in state 17 resolved as shift
-WARNING: shift/reduce conflict for L_PAREN in state 17 resolved as shift
-WARNING: shift/reduce conflict for COMMA in state 32 resolved as shift
-WARNING: shift/reduce conflict for R_PAREN in state 34 resolved as shift
+WARNING: shift/reduce conflict for SUFFIX in state 17 resolved as shift
+WARNING: shift/reduce conflict for SUFFIX in state 25 resolved as shift
+WARNING: shift/reduce conflict for SUFFIX in state 28 resolved as shift
+WARNING: shift/reduce conflict for COMMA in state 31 resolved as shift
+WARNING: shift/reduce conflict for R_PAREN in state 33 resolved as shift
+WARNING: shift/reduce conflict for L_PAREN in state 34 resolved as shift
+WARNING: shift/reduce conflict for WAVE_DASH in state 34 resolved as shift
+WARNING: shift/reduce conflict for PREFIX in state 34 resolved as shift
+WARNING: shift/reduce conflict for NUMBER in state 34 resolved as shift
+WARNING: shift/reduce conflict for ID in state 34 resolved as shift
+WARNING: shift/reduce conflict for FLOOR in state 34 resolved as shift
+WARNING: shift/reduce conflict for SUFFIX in state 34 resolved as shift
+WARNING: shift/reduce conflict for BULLET in state 35 resolved as shift
 WARNING: shift/reduce conflict for L_PAREN in state 35 resolved as shift
 WARNING: shift/reduce conflict for WAVE_DASH in state 35 resolved as shift
 WARNING: shift/reduce conflict for PREFIX in state 35 resolved as shift
 WARNING: shift/reduce conflict for NUMBER in state 35 resolved as shift
 WARNING: shift/reduce conflict for ID in state 35 resolved as shift
 WARNING: shift/reduce conflict for FLOOR in state 35 resolved as shift
-WARNING: shift/reduce conflict for BULLET in state 36 resolved as shift
-WARNING: shift/reduce conflict for L_PAREN in state 36 resolved as shift
-WARNING: shift/reduce conflict for WAVE_DASH in state 36 resolved as shift
-WARNING: shift/reduce conflict for PREFIX in state 36 resolved as shift
-WARNING: shift/reduce conflict for NUMBER in state 36 resolved as shift
-WARNING: shift/reduce conflict for ID in state 36 resolved as shift
-WARNING: shift/reduce conflict for FLOOR in state 36 resolved as shift
-WARNING: shift/reduce conflict for THEN in state 40 resolved as shift
+WARNING: shift/reduce conflict for SUFFIX in state 35 resolved as shift
+WARNING: shift/reduce conflict for THEN in state 38 resolved as shift
+WARNING: shift/reduce conflict for HYPHEN in state 38 resolved as shift
+WARNING: shift/reduce conflict for THEN in state 39 resolved as shift
+WARNING: shift/reduce conflict for HYPHEN in state 39 resolved as shift
 WARNING: shift/reduce conflict for HYPHEN in state 40 resolved as shift
-WARNING: shift/reduce conflict for THEN in state 41 resolved as shift
-WARNING: shift/reduce conflict for HYPHEN in state 41 resolved as shift
-WARNING: shift/reduce conflict for HYPHEN in state 42 resolved as shift
-WARNING: shift/reduce conflict for EXCLUDE in state 49 resolved as shift
+WARNING: shift/reduce conflict for EXCLUDE in state 47 resolved as shift
 WARNING: reduce/reduce conflict in state 3 resolved using rule (node_list -> node)
 WARNING: rejected rule (bullet_list -> node) in state 3
 WARNING: reduce/reduce conflict in state 14 resolved using rule (bullet_list -> node)
 WARNING: rejected rule (node -> node node) in state 14
-WARNING: reduce/reduce conflict in state 32 resolved using rule (node_list -> node)
-WARNING: rejected rule (bullet_list -> node) in state 32
+WARNING: reduce/reduce conflict in state 31 resolved using rule (node_list -> node)
+WARNING: rejected rule (bullet_list -> node) in state 31
 WARNING: Rule (node -> node node) is never reduced
