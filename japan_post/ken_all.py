@@ -8,35 +8,41 @@ from typing import Generator, Tuple
 import requests
 
 
-def download_data() -> Path:
+def download_data(temporary_dir: Path = Path('cache'), overwrite=False) -> Path:
+    path = temporary_dir / 'ken_all.zip'
+    if path.exists():
+        if overwrite:
+            path.unlink()
+        else:
+            return path
+
+    temporary_dir.mkdir(parents=True, exist_ok=True)
     url = 'http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip'
     response = requests.get(url)
-
-    path = Path('cache') / 'ken_all.zip'
     with open(path, 'wb') as f:
         f.write(response.content)
     return path
 
 
-def extract_zip(zip_path: Path) -> Generator[Path, None, None]:
+def extract_zip(zip_path: Path) -> Path:
     """
     zipを解凍してcsvに保存する
     """
     area_dir = zip_path.parent
     zip_doc = zipfile.ZipFile(str(zip_path))
     csv_files = [i.filename for i in zip_doc.filelist if str.lower(i.filename).endswith('.csv')]
-    for csv_filename in csv_files:
-        filename = area_dir / os.path.split(csv_filename)[1]
-        tmp_filename = filename.with_suffix('.tmp')
-        with open(tmp_filename, 'wb') as f:
-            f.write(zip_doc.read(csv_filename))
+    csv_filename =  csv_files[0]
+    filename = area_dir / os.path.split(csv_filename)[1]
+    tmp_filename = filename.with_suffix('.tmp')
+    with open(tmp_filename, 'wb') as f:
+        f.write(zip_doc.read(csv_filename))
 
-        with codecs.open(tmp_filename, 'r', 'cp932') as f_in:
-            with codecs.open(filename, "w", "utf-8") as f_out:
-                for row in f_in:
-                    f_out.write(row)
-        os.remove(tmp_filename)
-        yield filename
+    with codecs.open(tmp_filename, 'r', 'cp932') as f_in:
+        with codecs.open(filename, "w", "utf-8") as f_out:
+            for row in f_in:
+                f_out.write(row)
+    os.remove(tmp_filename)
+    return filename
 
 
 def get_chome_state(row) -> int:
@@ -88,3 +94,4 @@ def concatinate_read(path: Path) -> Generator[Tuple, None, None]:
                     prev_row = row
                 else:
                     raise Exception(f'illegal state:{chome_state} {row}')
+
