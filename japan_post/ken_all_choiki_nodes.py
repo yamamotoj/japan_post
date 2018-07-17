@@ -133,3 +133,12 @@ class TopNode(Node):
             return str(self.children[0])
         else:
             return ','.join([str(c) for c in self.children])
+
+
+class AllNode(Node):
+    def __init__(self, name):
+        super().__init__()
+        self.name = name
+
+    def __str__(self):
+        return 'all' + super().__str__()

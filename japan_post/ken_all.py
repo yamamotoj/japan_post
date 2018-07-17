@@ -62,8 +62,7 @@ def concat_row(row1, row2) -> Tuple:
 
 def concatinate_read(path: Path) -> Generator[Tuple, None, None]:
     """
-    :param path:
-    :return:
+    :param path: raw csv data path
     """
     with path.open('r') as f:
         prev_row = None

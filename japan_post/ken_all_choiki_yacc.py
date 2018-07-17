@@ -4,7 +4,7 @@ import ply.yacc as yacc
 
 from japan_post.ken_all_choiki_lex import tokens, lexer
 from japan_post.ken_all_choiki_nodes import RangeNode, NumberNode, StringNode, ExcludeNode, Node, \
-    SuffixNode, TopNode
+    SuffixNode, TopNode, AllNode
 
 
 def p_choiki(p):
@@ -225,6 +225,7 @@ def p_node(p):
      | num_node
      | string_node
      | suffix_node
+     | all_node
     """
     p[0] = p[1]
 
@@ -318,6 +319,13 @@ def p_only_suffix_node(p):
     suffix_node : SUFFIX
     """
     p[0] = SuffixNode(p[1])
+
+
+def p_all_node(p):
+    """
+    all_node : ALL
+    """
+    p[0] = AllNode(p[1])
 
 
 def p_error(p):

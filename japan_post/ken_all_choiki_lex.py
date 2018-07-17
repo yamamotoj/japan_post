@@ -37,6 +37,7 @@ tokens = (
     'THEN',
     'BULLET',
     'DIRECTION',
+    'ALL',
 )
 
 t_WAVE_DASH = r'～'
@@ -76,6 +77,8 @@ def t_ID(t):
     if 'の次に番地がくる場合' in t.value:
         t.value = 'の次に番地がくる場合'
         t.type = 'SUFFIX'
+    elif '一円' in t.value:
+        t.type = 'ALL'
     else:
         t.type = reserved.get(t.value, 'ID')  # Check for reserved words
     return t
