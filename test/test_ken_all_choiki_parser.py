@@ -182,4 +182,16 @@ class KenAllChoikiParserTest(unittest.TestCase):
     def test_choiki_parse033(self):
         s = '毛萱（前川原２３２～２４４、３１１、３１２、３３７～８６２番地〔東京電力福島第二原子力発電所構内〕）'
         ret = ken_all_choiki_yacc.parse_choiki(s)
-        self.assertEqual('毛萱-前川原-([232番地~244番地],311番地,312番地,[337番地~862番地]-東京電力福島第二原子力発電所構内)', str(ret), s)
+        self.assertEqual('毛萱-前川原-([232番地~244番地],311番地,312番地,[337番地~862番地]-東京電力福島第二原子力発電所構内)',
+                         str(ret), s)
+
+    # def test_choiki_parse034(self):
+    #     s = '美栄町（西５～８線７９～１１０番地）'
+    #     print(s)
+    #     ret = ken_all_choiki_yacc.parse_choiki(s)
+    #     self.assertEqual('', str(ret), s)
+
+    def test_choiki_parse035(self):
+        s = '位登（猪位金４～７区、清美町）'
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('位登-(猪位金-[4区~7区],清美町)', str(ret), s)

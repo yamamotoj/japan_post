@@ -169,7 +169,8 @@ def p_range_node(p):
         leaf = list(p1.get_leaf())[-1]
         parent = leaf.parent
         parent.remove_child(leaf)
-        range_node = RangeNode(leaf, p[3])
+        leaf.suffix = p3.suffix
+        range_node = RangeNode(leaf, p3)
         parent.add_child(range_node)
         p[0] = p[1]
     else:

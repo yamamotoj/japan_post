@@ -14,6 +14,8 @@ reserved = {
     '第': 'PREFIX',
     '地階': 'FLOOR',
     '階層不明': 'FLOOR',
+    '線': 'SUFFIX',
+    '区': 'SUFFIX',
 }
 
 tokens = (
