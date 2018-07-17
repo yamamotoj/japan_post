@@ -19,40 +19,41 @@ Rule 13    num_node -> num_node THEN num_node
 Rule 14    range_node -> node WAVE_DASH node
 Rule 15    node -> node node
 Rule 16    num_node -> num_node HYPHEN num_node
-Rule 17    node -> range_node
-Rule 18    node -> num_node
-Rule 19    node -> string_node
-Rule 20    node -> suffix_node
-Rule 21    num_node -> PREFIX NUMBER
-Rule 22    num_node -> PREFIX NUMBER SUFFIX
-Rule 23    num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-Rule 24    num_node -> NUMBER SUFFIX
-Rule 25    num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX
-Rule 26    num_node -> NUMBER
-Rule 27    num_node -> NUMBER COMPARATIVE_SUFFIX
-Rule 28    num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX
-Rule 29    string_node -> ID NUMBER
-Rule 30    string_node -> ID NUMBER SUFFIX
-Rule 31    string_node -> ID
-Rule 32    string_node -> ID DOT ID
-Rule 33    string_node -> FLOOR BULLET FLOOR
-Rule 34    suffix_node -> L_PAREN SUFFIX R_PAREN
+Rule 17    string_node -> string_node HYPHEN num_node
+Rule 18    node -> range_node
+Rule 19    node -> num_node
+Rule 20    node -> string_node
+Rule 21    node -> suffix_node
+Rule 22    num_node -> PREFIX NUMBER
+Rule 23    num_node -> PREFIX NUMBER SUFFIX
+Rule 24    num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+Rule 25    num_node -> NUMBER SUFFIX
+Rule 26    num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX
+Rule 27    num_node -> NUMBER
+Rule 28    num_node -> NUMBER COMPARATIVE_SUFFIX
+Rule 29    num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX
+Rule 30    string_node -> ID NUMBER
+Rule 31    string_node -> ID NUMBER SUFFIX
+Rule 32    string_node -> ID
+Rule 33    string_node -> ID DOT ID
+Rule 34    string_node -> FLOOR BULLET FLOOR
+Rule 35    suffix_node -> L_PAREN SUFFIX R_PAREN
 
 Terminals, with rules where they appear
 
-BULLET               : 11 33
+BULLET               : 11 34
 COMMA                : 5 7
-COMPARATIVE_SUFFIX   : 23 25 27 28
-DOT                  : 32
+COMPARATIVE_SUFFIX   : 24 26 28 29
+DOT                  : 33
 EXCLUDE              : 3 4
-FLOOR                : 33 33
-HYPHEN               : 16
-ID                   : 29 30 31 32 32
-L_PAREN              : 2 3 4 10 34
-NUMBER               : 21 22 23 24 25 26 27 28 29 30
-PREFIX               : 21 22 23 28
-R_PAREN              : 2 3 4 10 34
-SUFFIX               : 22 23 24 25 30 34
+FLOOR                : 34 34
+HYPHEN               : 16 17
+ID                   : 30 31 32 33 33
+L_PAREN              : 2 3 4 10 35
+NUMBER               : 22 23 24 25 26 27 28 29 30 31
+PREFIX               : 22 23 24 29
+R_PAREN              : 2 3 4 10 35
+SUFFIX               : 23 24 25 26 31 35
 THEN                 : 13
 WAVE_DASH            : 14
 error                : 
@@ -63,10 +64,10 @@ bullet_list          : 7 8 9 10 11
 choiki               : 0
 node                 : 2 3 4 5 6 9 10 11 12 14 14 15 15
 node_list            : 1 2 3 4 5 7
-num_node             : 13 13 16 16 18
-range_node           : 17
-string_node          : 19
-suffix_node          : 20
+num_node             : 13 13 16 16 17 19
+range_node           : 18
+string_node          : 17 20
+suffix_node          : 21
 
 Parsing method: LALR
 
@@ -84,29 +85,30 @@ state 0
     (9) node -> . node bullet_list
     (10) node -> . node L_PAREN bullet_list R_PAREN
     (15) node -> . node node
-    (17) node -> . range_node
-    (18) node -> . num_node
-    (19) node -> . string_node
-    (20) node -> . suffix_node
+    (18) node -> . range_node
+    (19) node -> . num_node
+    (20) node -> . string_node
+    (21) node -> . suffix_node
     (11) bullet_list -> . node BULLET bullet_list
     (12) bullet_list -> . node
     (14) range_node -> . node WAVE_DASH node
     (13) num_node -> . num_node THEN num_node
     (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
-    (29) string_node -> . ID NUMBER
-    (30) string_node -> . ID NUMBER SUFFIX
-    (31) string_node -> . ID
-    (32) string_node -> . ID DOT ID
-    (33) string_node -> . FLOOR BULLET FLOOR
-    (34) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+    (17) string_node -> . string_node HYPHEN num_node
+    (30) string_node -> . ID NUMBER
+    (31) string_node -> . ID NUMBER SUFFIX
+    (32) string_node -> . ID
+    (33) string_node -> . ID DOT ID
+    (34) string_node -> . FLOOR BULLET FLOOR
+    (35) suffix_node -> . L_PAREN SUFFIX R_PAREN
 
     PREFIX          shift and go to state 10
     NUMBER          shift and go to state 11
@@ -157,27 +159,28 @@ state 3
     (9) node -> . node bullet_list
     (10) node -> . node L_PAREN bullet_list R_PAREN
     (15) node -> . node node
-    (17) node -> . range_node
-    (18) node -> . num_node
-    (19) node -> . string_node
-    (20) node -> . suffix_node
+    (18) node -> . range_node
+    (19) node -> . num_node
+    (20) node -> . string_node
+    (21) node -> . suffix_node
     (14) range_node -> . node WAVE_DASH node
     (13) num_node -> . num_node THEN num_node
     (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
-    (29) string_node -> . ID NUMBER
-    (30) string_node -> . ID NUMBER SUFFIX
-    (31) string_node -> . ID
-    (32) string_node -> . ID DOT ID
-    (33) string_node -> . FLOOR BULLET FLOOR
-    (34) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+    (17) string_node -> . string_node HYPHEN num_node
+    (30) string_node -> . ID NUMBER
+    (31) string_node -> . ID NUMBER SUFFIX
+    (32) string_node -> . ID
+    (33) string_node -> . ID DOT ID
+    (34) string_node -> . FLOOR BULLET FLOOR
+    (35) suffix_node -> . L_PAREN SUFFIX R_PAREN
 
   ! shift/reduce conflict for COMMA resolved as shift
   ! reduce/reduce conflict for $end resolved using rule 6 (node_list -> node .)
@@ -220,146 +223,149 @@ state 4
 
 state 5
 
-    (34) suffix_node -> L_PAREN . SUFFIX R_PAREN
+    (35) suffix_node -> L_PAREN . SUFFIX R_PAREN
 
     SUFFIX          shift and go to state 21
 
 
 state 6
 
-    (17) node -> range_node .
+    (18) node -> range_node .
 
-    COMMA           reduce using rule 17 (node -> range_node .)
-    L_PAREN         reduce using rule 17 (node -> range_node .)
-    BULLET          reduce using rule 17 (node -> range_node .)
-    WAVE_DASH       reduce using rule 17 (node -> range_node .)
-    PREFIX          reduce using rule 17 (node -> range_node .)
-    NUMBER          reduce using rule 17 (node -> range_node .)
-    ID              reduce using rule 17 (node -> range_node .)
-    FLOOR           reduce using rule 17 (node -> range_node .)
-    $end            reduce using rule 17 (node -> range_node .)
-    R_PAREN         reduce using rule 17 (node -> range_node .)
-    EXCLUDE         reduce using rule 17 (node -> range_node .)
+    COMMA           reduce using rule 18 (node -> range_node .)
+    L_PAREN         reduce using rule 18 (node -> range_node .)
+    BULLET          reduce using rule 18 (node -> range_node .)
+    WAVE_DASH       reduce using rule 18 (node -> range_node .)
+    PREFIX          reduce using rule 18 (node -> range_node .)
+    NUMBER          reduce using rule 18 (node -> range_node .)
+    ID              reduce using rule 18 (node -> range_node .)
+    FLOOR           reduce using rule 18 (node -> range_node .)
+    $end            reduce using rule 18 (node -> range_node .)
+    R_PAREN         reduce using rule 18 (node -> range_node .)
+    EXCLUDE         reduce using rule 18 (node -> range_node .)
 
 
 state 7
 
-    (18) node -> num_node .
+    (19) node -> num_node .
     (13) num_node -> num_node . THEN num_node
     (16) num_node -> num_node . HYPHEN num_node
 
-    COMMA           reduce using rule 18 (node -> num_node .)
-    L_PAREN         reduce using rule 18 (node -> num_node .)
-    BULLET          reduce using rule 18 (node -> num_node .)
-    WAVE_DASH       reduce using rule 18 (node -> num_node .)
-    PREFIX          reduce using rule 18 (node -> num_node .)
-    NUMBER          reduce using rule 18 (node -> num_node .)
-    ID              reduce using rule 18 (node -> num_node .)
-    FLOOR           reduce using rule 18 (node -> num_node .)
-    $end            reduce using rule 18 (node -> num_node .)
-    R_PAREN         reduce using rule 18 (node -> num_node .)
-    EXCLUDE         reduce using rule 18 (node -> num_node .)
+    COMMA           reduce using rule 19 (node -> num_node .)
+    L_PAREN         reduce using rule 19 (node -> num_node .)
+    BULLET          reduce using rule 19 (node -> num_node .)
+    WAVE_DASH       reduce using rule 19 (node -> num_node .)
+    PREFIX          reduce using rule 19 (node -> num_node .)
+    NUMBER          reduce using rule 19 (node -> num_node .)
+    ID              reduce using rule 19 (node -> num_node .)
+    FLOOR           reduce using rule 19 (node -> num_node .)
+    $end            reduce using rule 19 (node -> num_node .)
+    R_PAREN         reduce using rule 19 (node -> num_node .)
+    EXCLUDE         reduce using rule 19 (node -> num_node .)
     THEN            shift and go to state 22
     HYPHEN          shift and go to state 23
 
 
 state 8
 
-    (19) node -> string_node .
+    (20) node -> string_node .
+    (17) string_node -> string_node . HYPHEN num_node
 
-    COMMA           reduce using rule 19 (node -> string_node .)
-    L_PAREN         reduce using rule 19 (node -> string_node .)
-    BULLET          reduce using rule 19 (node -> string_node .)
-    WAVE_DASH       reduce using rule 19 (node -> string_node .)
-    PREFIX          reduce using rule 19 (node -> string_node .)
-    NUMBER          reduce using rule 19 (node -> string_node .)
-    ID              reduce using rule 19 (node -> string_node .)
-    FLOOR           reduce using rule 19 (node -> string_node .)
-    $end            reduce using rule 19 (node -> string_node .)
-    R_PAREN         reduce using rule 19 (node -> string_node .)
-    EXCLUDE         reduce using rule 19 (node -> string_node .)
+    COMMA           reduce using rule 20 (node -> string_node .)
+    L_PAREN         reduce using rule 20 (node -> string_node .)
+    BULLET          reduce using rule 20 (node -> string_node .)
+    WAVE_DASH       reduce using rule 20 (node -> string_node .)
+    PREFIX          reduce using rule 20 (node -> string_node .)
+    NUMBER          reduce using rule 20 (node -> string_node .)
+    ID              reduce using rule 20 (node -> string_node .)
+    FLOOR           reduce using rule 20 (node -> string_node .)
+    $end            reduce using rule 20 (node -> string_node .)
+    R_PAREN         reduce using rule 20 (node -> string_node .)
+    EXCLUDE         reduce using rule 20 (node -> string_node .)
+    HYPHEN          shift and go to state 24
 
 
 state 9
 
-    (20) node -> suffix_node .
+    (21) node -> suffix_node .
 
-    COMMA           reduce using rule 20 (node -> suffix_node .)
-    L_PAREN         reduce using rule 20 (node -> suffix_node .)
-    BULLET          reduce using rule 20 (node -> suffix_node .)
-    WAVE_DASH       reduce using rule 20 (node -> suffix_node .)
-    PREFIX          reduce using rule 20 (node -> suffix_node .)
-    NUMBER          reduce using rule 20 (node -> suffix_node .)
-    ID              reduce using rule 20 (node -> suffix_node .)
-    FLOOR           reduce using rule 20 (node -> suffix_node .)
-    $end            reduce using rule 20 (node -> suffix_node .)
-    R_PAREN         reduce using rule 20 (node -> suffix_node .)
-    EXCLUDE         reduce using rule 20 (node -> suffix_node .)
+    COMMA           reduce using rule 21 (node -> suffix_node .)
+    L_PAREN         reduce using rule 21 (node -> suffix_node .)
+    BULLET          reduce using rule 21 (node -> suffix_node .)
+    WAVE_DASH       reduce using rule 21 (node -> suffix_node .)
+    PREFIX          reduce using rule 21 (node -> suffix_node .)
+    NUMBER          reduce using rule 21 (node -> suffix_node .)
+    ID              reduce using rule 21 (node -> suffix_node .)
+    FLOOR           reduce using rule 21 (node -> suffix_node .)
+    $end            reduce using rule 21 (node -> suffix_node .)
+    R_PAREN         reduce using rule 21 (node -> suffix_node .)
+    EXCLUDE         reduce using rule 21 (node -> suffix_node .)
 
 
 state 10
 
-    (21) num_node -> PREFIX . NUMBER
-    (22) num_node -> PREFIX . NUMBER SUFFIX
-    (23) num_node -> PREFIX . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (28) num_node -> PREFIX . NUMBER COMPARATIVE_SUFFIX
+    (22) num_node -> PREFIX . NUMBER
+    (23) num_node -> PREFIX . NUMBER SUFFIX
+    (24) num_node -> PREFIX . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (29) num_node -> PREFIX . NUMBER COMPARATIVE_SUFFIX
 
-    NUMBER          shift and go to state 24
+    NUMBER          shift and go to state 25
 
 
 state 11
 
-    (24) num_node -> NUMBER . SUFFIX
-    (25) num_node -> NUMBER . SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> NUMBER .
-    (27) num_node -> NUMBER . COMPARATIVE_SUFFIX
+    (25) num_node -> NUMBER . SUFFIX
+    (26) num_node -> NUMBER . SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> NUMBER .
+    (28) num_node -> NUMBER . COMPARATIVE_SUFFIX
 
-    SUFFIX          shift and go to state 25
-    THEN            reduce using rule 26 (num_node -> NUMBER .)
-    HYPHEN          reduce using rule 26 (num_node -> NUMBER .)
-    COMMA           reduce using rule 26 (num_node -> NUMBER .)
-    L_PAREN         reduce using rule 26 (num_node -> NUMBER .)
-    BULLET          reduce using rule 26 (num_node -> NUMBER .)
-    WAVE_DASH       reduce using rule 26 (num_node -> NUMBER .)
-    PREFIX          reduce using rule 26 (num_node -> NUMBER .)
-    NUMBER          reduce using rule 26 (num_node -> NUMBER .)
-    ID              reduce using rule 26 (num_node -> NUMBER .)
-    FLOOR           reduce using rule 26 (num_node -> NUMBER .)
-    $end            reduce using rule 26 (num_node -> NUMBER .)
-    R_PAREN         reduce using rule 26 (num_node -> NUMBER .)
-    EXCLUDE         reduce using rule 26 (num_node -> NUMBER .)
-    COMPARATIVE_SUFFIX shift and go to state 26
+    SUFFIX          shift and go to state 26
+    THEN            reduce using rule 27 (num_node -> NUMBER .)
+    HYPHEN          reduce using rule 27 (num_node -> NUMBER .)
+    COMMA           reduce using rule 27 (num_node -> NUMBER .)
+    L_PAREN         reduce using rule 27 (num_node -> NUMBER .)
+    BULLET          reduce using rule 27 (num_node -> NUMBER .)
+    WAVE_DASH       reduce using rule 27 (num_node -> NUMBER .)
+    PREFIX          reduce using rule 27 (num_node -> NUMBER .)
+    NUMBER          reduce using rule 27 (num_node -> NUMBER .)
+    ID              reduce using rule 27 (num_node -> NUMBER .)
+    FLOOR           reduce using rule 27 (num_node -> NUMBER .)
+    $end            reduce using rule 27 (num_node -> NUMBER .)
+    R_PAREN         reduce using rule 27 (num_node -> NUMBER .)
+    EXCLUDE         reduce using rule 27 (num_node -> NUMBER .)
+    COMPARATIVE_SUFFIX shift and go to state 27
 
 
 state 12
 
-    (29) string_node -> ID . NUMBER
-    (30) string_node -> ID . NUMBER SUFFIX
-    (31) string_node -> ID .
-    (32) string_node -> ID . DOT ID
+    (30) string_node -> ID . NUMBER
+    (31) string_node -> ID . NUMBER SUFFIX
+    (32) string_node -> ID .
+    (33) string_node -> ID . DOT ID
 
   ! shift/reduce conflict for NUMBER resolved as shift
-    NUMBER          shift and go to state 27
-    COMMA           reduce using rule 31 (string_node -> ID .)
-    L_PAREN         reduce using rule 31 (string_node -> ID .)
-    BULLET          reduce using rule 31 (string_node -> ID .)
-    WAVE_DASH       reduce using rule 31 (string_node -> ID .)
-    PREFIX          reduce using rule 31 (string_node -> ID .)
-    ID              reduce using rule 31 (string_node -> ID .)
-    FLOOR           reduce using rule 31 (string_node -> ID .)
-    $end            reduce using rule 31 (string_node -> ID .)
-    R_PAREN         reduce using rule 31 (string_node -> ID .)
-    EXCLUDE         reduce using rule 31 (string_node -> ID .)
-    DOT             shift and go to state 28
+    NUMBER          shift and go to state 28
+    HYPHEN          reduce using rule 32 (string_node -> ID .)
+    COMMA           reduce using rule 32 (string_node -> ID .)
+    L_PAREN         reduce using rule 32 (string_node -> ID .)
+    BULLET          reduce using rule 32 (string_node -> ID .)
+    WAVE_DASH       reduce using rule 32 (string_node -> ID .)
+    PREFIX          reduce using rule 32 (string_node -> ID .)
+    ID              reduce using rule 32 (string_node -> ID .)
+    FLOOR           reduce using rule 32 (string_node -> ID .)
+    $end            reduce using rule 32 (string_node -> ID .)
+    R_PAREN         reduce using rule 32 (string_node -> ID .)
+    EXCLUDE         reduce using rule 32 (string_node -> ID .)
+    DOT             shift and go to state 29
 
-  ! NUMBER          [ reduce using rule 31 (string_node -> ID .) ]
+  ! NUMBER          [ reduce using rule 32 (string_node -> ID .) ]
 
 
 state 13
 
-    (33) string_node -> FLOOR . BULLET FLOOR
+    (34) string_node -> FLOOR . BULLET FLOOR
 
-    BULLET          shift and go to state 29
+    BULLET          shift and go to state 30
 
 
 state 14
@@ -382,27 +388,28 @@ state 14
     (9) node -> . node bullet_list
     (10) node -> . node L_PAREN bullet_list R_PAREN
     (15) node -> . node node
-    (17) node -> . range_node
-    (18) node -> . num_node
-    (19) node -> . string_node
-    (20) node -> . suffix_node
+    (18) node -> . range_node
+    (19) node -> . num_node
+    (20) node -> . string_node
+    (21) node -> . suffix_node
     (14) range_node -> . node WAVE_DASH node
     (13) num_node -> . num_node THEN num_node
     (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
-    (29) string_node -> . ID NUMBER
-    (30) string_node -> . ID NUMBER SUFFIX
-    (31) string_node -> . ID
-    (32) string_node -> . ID DOT ID
-    (33) string_node -> . FLOOR BULLET FLOOR
-    (34) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+    (17) string_node -> . string_node HYPHEN num_node
+    (30) string_node -> . ID NUMBER
+    (31) string_node -> . ID NUMBER SUFFIX
+    (32) string_node -> . ID
+    (33) string_node -> . ID DOT ID
+    (34) string_node -> . FLOOR BULLET FLOOR
+    (35) suffix_node -> . L_PAREN SUFFIX R_PAREN
 
   ! shift/reduce conflict for BULLET resolved as shift
   ! reduce/reduce conflict for COMMA resolved using rule 12 (bullet_list -> node .)
@@ -473,29 +480,30 @@ state 15
     (9) node -> . node bullet_list
     (10) node -> . node L_PAREN bullet_list R_PAREN
     (15) node -> . node node
-    (17) node -> . range_node
-    (18) node -> . num_node
-    (19) node -> . string_node
-    (20) node -> . suffix_node
+    (18) node -> . range_node
+    (19) node -> . num_node
+    (20) node -> . string_node
+    (21) node -> . suffix_node
     (11) bullet_list -> . node BULLET bullet_list
     (12) bullet_list -> . node
     (14) range_node -> . node WAVE_DASH node
     (13) num_node -> . num_node THEN num_node
     (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
-    (29) string_node -> . ID NUMBER
-    (30) string_node -> . ID NUMBER SUFFIX
-    (31) string_node -> . ID
-    (32) string_node -> . ID DOT ID
-    (33) string_node -> . FLOOR BULLET FLOOR
-    (34) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+    (17) string_node -> . string_node HYPHEN num_node
+    (30) string_node -> . ID NUMBER
+    (31) string_node -> . ID NUMBER SUFFIX
+    (32) string_node -> . ID
+    (33) string_node -> . ID DOT ID
+    (34) string_node -> . FLOOR BULLET FLOOR
+    (35) suffix_node -> . L_PAREN SUFFIX R_PAREN
 
     PREFIX          shift and go to state 10
     NUMBER          shift and go to state 11
@@ -504,7 +512,7 @@ state 15
     L_PAREN         shift and go to state 5
 
     node                           shift and go to state 3
-    node_list                      shift and go to state 30
+    node_list                      shift and go to state 31
     bullet_list                    shift and go to state 4
     range_node                     shift and go to state 6
     num_node                       shift and go to state 7
@@ -517,7 +525,7 @@ state 16
     (3) node -> node L_PAREN . node_list EXCLUDE R_PAREN
     (4) node -> node L_PAREN . node_list R_PAREN EXCLUDE
     (10) node -> node L_PAREN . bullet_list R_PAREN
-    (34) suffix_node -> L_PAREN . SUFFIX R_PAREN
+    (35) suffix_node -> L_PAREN . SUFFIX R_PAREN
     (5) node_list -> . node COMMA node_list
     (6) node_list -> . node
     (7) node_list -> . bullet_list COMMA node_list
@@ -530,27 +538,28 @@ state 16
     (9) node -> . node bullet_list
     (10) node -> . node L_PAREN bullet_list R_PAREN
     (15) node -> . node node
-    (17) node -> . range_node
-    (18) node -> . num_node
-    (19) node -> . string_node
-    (20) node -> . suffix_node
+    (18) node -> . range_node
+    (19) node -> . num_node
+    (20) node -> . string_node
+    (21) node -> . suffix_node
     (14) range_node -> . node WAVE_DASH node
     (13) num_node -> . num_node THEN num_node
     (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
-    (29) string_node -> . ID NUMBER
-    (30) string_node -> . ID NUMBER SUFFIX
-    (31) string_node -> . ID
-    (32) string_node -> . ID DOT ID
-    (33) string_node -> . FLOOR BULLET FLOOR
-    (34) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+    (17) string_node -> . string_node HYPHEN num_node
+    (30) string_node -> . ID NUMBER
+    (31) string_node -> . ID NUMBER SUFFIX
+    (32) string_node -> . ID
+    (33) string_node -> . ID DOT ID
+    (34) string_node -> . FLOOR BULLET FLOOR
+    (35) suffix_node -> . L_PAREN SUFFIX R_PAREN
 
     SUFFIX          shift and go to state 21
     PREFIX          shift and go to state 10
@@ -559,9 +568,9 @@ state 16
     FLOOR           shift and go to state 13
     L_PAREN         shift and go to state 5
 
-    node                           shift and go to state 31
-    node_list                      shift and go to state 32
-    bullet_list                    shift and go to state 33
+    node                           shift and go to state 32
+    node_list                      shift and go to state 33
+    bullet_list                    shift and go to state 34
     range_node                     shift and go to state 6
     num_node                       shift and go to state 7
     string_node                    shift and go to state 8
@@ -595,27 +604,28 @@ state 18
     (9) node -> . node bullet_list
     (10) node -> . node L_PAREN bullet_list R_PAREN
     (15) node -> . node node
-    (17) node -> . range_node
-    (18) node -> . num_node
-    (19) node -> . string_node
-    (20) node -> . suffix_node
+    (18) node -> . range_node
+    (19) node -> . num_node
+    (20) node -> . string_node
+    (21) node -> . suffix_node
     (14) range_node -> . node WAVE_DASH node
     (13) num_node -> . num_node THEN num_node
     (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
-    (29) string_node -> . ID NUMBER
-    (30) string_node -> . ID NUMBER SUFFIX
-    (31) string_node -> . ID
-    (32) string_node -> . ID DOT ID
-    (33) string_node -> . FLOOR BULLET FLOOR
-    (34) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+    (17) string_node -> . string_node HYPHEN num_node
+    (30) string_node -> . ID NUMBER
+    (31) string_node -> . ID NUMBER SUFFIX
+    (32) string_node -> . ID
+    (33) string_node -> . ID DOT ID
+    (34) string_node -> . FLOOR BULLET FLOOR
+    (35) suffix_node -> . L_PAREN SUFFIX R_PAREN
 
     PREFIX          shift and go to state 10
     NUMBER          shift and go to state 11
@@ -623,8 +633,8 @@ state 18
     FLOOR           shift and go to state 13
     L_PAREN         shift and go to state 5
 
-    node                           shift and go to state 34
-    bullet_list                    shift and go to state 35
+    node                           shift and go to state 35
+    bullet_list                    shift and go to state 36
     range_node                     shift and go to state 6
     num_node                       shift and go to state 7
     string_node                    shift and go to state 8
@@ -639,27 +649,28 @@ state 19
     (9) node -> . node bullet_list
     (10) node -> . node L_PAREN bullet_list R_PAREN
     (15) node -> . node node
-    (17) node -> . range_node
-    (18) node -> . num_node
-    (19) node -> . string_node
-    (20) node -> . suffix_node
+    (18) node -> . range_node
+    (19) node -> . num_node
+    (20) node -> . string_node
+    (21) node -> . suffix_node
     (14) range_node -> . node WAVE_DASH node
     (13) num_node -> . num_node THEN num_node
     (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
-    (29) string_node -> . ID NUMBER
-    (30) string_node -> . ID NUMBER SUFFIX
-    (31) string_node -> . ID
-    (32) string_node -> . ID DOT ID
-    (33) string_node -> . FLOOR BULLET FLOOR
-    (34) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+    (17) string_node -> . string_node HYPHEN num_node
+    (30) string_node -> . ID NUMBER
+    (31) string_node -> . ID NUMBER SUFFIX
+    (32) string_node -> . ID
+    (33) string_node -> . ID DOT ID
+    (34) string_node -> . FLOOR BULLET FLOOR
+    (35) suffix_node -> . L_PAREN SUFFIX R_PAREN
 
     PREFIX          shift and go to state 10
     NUMBER          shift and go to state 11
@@ -667,7 +678,7 @@ state 19
     FLOOR           shift and go to state 13
     L_PAREN         shift and go to state 5
 
-    node                           shift and go to state 36
+    node                           shift and go to state 37
     range_node                     shift and go to state 6
     num_node                       shift and go to state 7
     string_node                    shift and go to state 8
@@ -686,29 +697,30 @@ state 20
     (9) node -> . node bullet_list
     (10) node -> . node L_PAREN bullet_list R_PAREN
     (15) node -> . node node
-    (17) node -> . range_node
-    (18) node -> . num_node
-    (19) node -> . string_node
-    (20) node -> . suffix_node
+    (18) node -> . range_node
+    (19) node -> . num_node
+    (20) node -> . string_node
+    (21) node -> . suffix_node
     (11) bullet_list -> . node BULLET bullet_list
     (12) bullet_list -> . node
     (14) range_node -> . node WAVE_DASH node
     (13) num_node -> . num_node THEN num_node
     (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
-    (29) string_node -> . ID NUMBER
-    (30) string_node -> . ID NUMBER SUFFIX
-    (31) string_node -> . ID
-    (32) string_node -> . ID DOT ID
-    (33) string_node -> . FLOOR BULLET FLOOR
-    (34) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+    (17) string_node -> . string_node HYPHEN num_node
+    (30) string_node -> . ID NUMBER
+    (31) string_node -> . ID NUMBER SUFFIX
+    (32) string_node -> . ID
+    (33) string_node -> . ID DOT ID
+    (34) string_node -> . FLOOR BULLET FLOOR
+    (35) suffix_node -> . L_PAREN SUFFIX R_PAREN
 
     PREFIX          shift and go to state 10
     NUMBER          shift and go to state 11
@@ -717,7 +729,7 @@ state 20
     L_PAREN         shift and go to state 5
 
     bullet_list                    shift and go to state 4
-    node_list                      shift and go to state 37
+    node_list                      shift and go to state 38
     node                           shift and go to state 3
     range_node                     shift and go to state 6
     num_node                       shift and go to state 7
@@ -726,9 +738,9 @@ state 20
 
 state 21
 
-    (34) suffix_node -> L_PAREN SUFFIX . R_PAREN
+    (35) suffix_node -> L_PAREN SUFFIX . R_PAREN
 
-    R_PAREN         shift and go to state 38
+    R_PAREN         shift and go to state 39
 
 
 state 22
@@ -736,137 +748,157 @@ state 22
     (13) num_node -> num_node THEN . num_node
     (13) num_node -> . num_node THEN num_node
     (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
-
-    PREFIX          shift and go to state 10
-    NUMBER          shift and go to state 11
-
-    num_node                       shift and go to state 39
-
-state 23
-
-    (16) num_node -> num_node HYPHEN . num_node
-    (13) num_node -> . num_node THEN num_node
-    (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
 
     PREFIX          shift and go to state 10
     NUMBER          shift and go to state 11
 
     num_node                       shift and go to state 40
 
+state 23
+
+    (16) num_node -> num_node HYPHEN . num_node
+    (13) num_node -> . num_node THEN num_node
+    (16) num_node -> . num_node HYPHEN num_node
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+
+    PREFIX          shift and go to state 10
+    NUMBER          shift and go to state 11
+
+    num_node                       shift and go to state 41
+
 state 24
 
-    (21) num_node -> PREFIX NUMBER .
-    (22) num_node -> PREFIX NUMBER . SUFFIX
-    (23) num_node -> PREFIX NUMBER . SUFFIX COMPARATIVE_SUFFIX
-    (28) num_node -> PREFIX NUMBER . COMPARATIVE_SUFFIX
+    (17) string_node -> string_node HYPHEN . num_node
+    (13) num_node -> . num_node THEN num_node
+    (16) num_node -> . num_node HYPHEN num_node
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
 
-    THEN            reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    HYPHEN          reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    COMMA           reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    L_PAREN         reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    BULLET          reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    WAVE_DASH       reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    PREFIX          reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    NUMBER          reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    ID              reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    FLOOR           reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    $end            reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    R_PAREN         reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    EXCLUDE         reduce using rule 21 (num_node -> PREFIX NUMBER .)
-    SUFFIX          shift and go to state 41
-    COMPARATIVE_SUFFIX shift and go to state 42
+    PREFIX          shift and go to state 10
+    NUMBER          shift and go to state 11
 
+    num_node                       shift and go to state 42
 
 state 25
 
-    (24) num_node -> NUMBER SUFFIX .
-    (25) num_node -> NUMBER SUFFIX . COMPARATIVE_SUFFIX
+    (22) num_node -> PREFIX NUMBER .
+    (23) num_node -> PREFIX NUMBER . SUFFIX
+    (24) num_node -> PREFIX NUMBER . SUFFIX COMPARATIVE_SUFFIX
+    (29) num_node -> PREFIX NUMBER . COMPARATIVE_SUFFIX
 
-    THEN            reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    HYPHEN          reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    COMMA           reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    L_PAREN         reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    BULLET          reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    WAVE_DASH       reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    PREFIX          reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    NUMBER          reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    ID              reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    FLOOR           reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    $end            reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    R_PAREN         reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    EXCLUDE         reduce using rule 24 (num_node -> NUMBER SUFFIX .)
-    COMPARATIVE_SUFFIX shift and go to state 43
+    THEN            reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    HYPHEN          reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    COMMA           reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    L_PAREN         reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    BULLET          reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    WAVE_DASH       reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    PREFIX          reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    NUMBER          reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    ID              reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    FLOOR           reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    $end            reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    R_PAREN         reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    EXCLUDE         reduce using rule 22 (num_node -> PREFIX NUMBER .)
+    SUFFIX          shift and go to state 43
+    COMPARATIVE_SUFFIX shift and go to state 44
 
 
 state 26
 
-    (27) num_node -> NUMBER COMPARATIVE_SUFFIX .
+    (25) num_node -> NUMBER SUFFIX .
+    (26) num_node -> NUMBER SUFFIX . COMPARATIVE_SUFFIX
 
-    THEN            reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
-    HYPHEN          reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
-    COMMA           reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
-    L_PAREN         reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
-    BULLET          reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
-    WAVE_DASH       reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
-    PREFIX          reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
-    NUMBER          reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
-    ID              reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
-    FLOOR           reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
-    $end            reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
-    R_PAREN         reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
-    EXCLUDE         reduce using rule 27 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    THEN            reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    HYPHEN          reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    COMMA           reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    L_PAREN         reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    BULLET          reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    WAVE_DASH       reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    PREFIX          reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    NUMBER          reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    ID              reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    FLOOR           reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    $end            reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    R_PAREN         reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    EXCLUDE         reduce using rule 25 (num_node -> NUMBER SUFFIX .)
+    COMPARATIVE_SUFFIX shift and go to state 45
 
 
 state 27
 
-    (29) string_node -> ID NUMBER .
-    (30) string_node -> ID NUMBER . SUFFIX
+    (28) num_node -> NUMBER COMPARATIVE_SUFFIX .
 
-    COMMA           reduce using rule 29 (string_node -> ID NUMBER .)
-    L_PAREN         reduce using rule 29 (string_node -> ID NUMBER .)
-    BULLET          reduce using rule 29 (string_node -> ID NUMBER .)
-    WAVE_DASH       reduce using rule 29 (string_node -> ID NUMBER .)
-    PREFIX          reduce using rule 29 (string_node -> ID NUMBER .)
-    NUMBER          reduce using rule 29 (string_node -> ID NUMBER .)
-    ID              reduce using rule 29 (string_node -> ID NUMBER .)
-    FLOOR           reduce using rule 29 (string_node -> ID NUMBER .)
-    $end            reduce using rule 29 (string_node -> ID NUMBER .)
-    R_PAREN         reduce using rule 29 (string_node -> ID NUMBER .)
-    EXCLUDE         reduce using rule 29 (string_node -> ID NUMBER .)
-    SUFFIX          shift and go to state 44
+    THEN            reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    HYPHEN          reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    COMMA           reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    L_PAREN         reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    BULLET          reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    WAVE_DASH       reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    PREFIX          reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    NUMBER          reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    ID              reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    FLOOR           reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    $end            reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    R_PAREN         reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
+    EXCLUDE         reduce using rule 28 (num_node -> NUMBER COMPARATIVE_SUFFIX .)
 
 
 state 28
 
-    (32) string_node -> ID DOT . ID
+    (30) string_node -> ID NUMBER .
+    (31) string_node -> ID NUMBER . SUFFIX
 
-    ID              shift and go to state 45
+    HYPHEN          reduce using rule 30 (string_node -> ID NUMBER .)
+    COMMA           reduce using rule 30 (string_node -> ID NUMBER .)
+    L_PAREN         reduce using rule 30 (string_node -> ID NUMBER .)
+    BULLET          reduce using rule 30 (string_node -> ID NUMBER .)
+    WAVE_DASH       reduce using rule 30 (string_node -> ID NUMBER .)
+    PREFIX          reduce using rule 30 (string_node -> ID NUMBER .)
+    NUMBER          reduce using rule 30 (string_node -> ID NUMBER .)
+    ID              reduce using rule 30 (string_node -> ID NUMBER .)
+    FLOOR           reduce using rule 30 (string_node -> ID NUMBER .)
+    $end            reduce using rule 30 (string_node -> ID NUMBER .)
+    R_PAREN         reduce using rule 30 (string_node -> ID NUMBER .)
+    EXCLUDE         reduce using rule 30 (string_node -> ID NUMBER .)
+    SUFFIX          shift and go to state 46
 
 
 state 29
 
-    (33) string_node -> FLOOR BULLET . FLOOR
+    (33) string_node -> ID DOT . ID
 
-    FLOOR           shift and go to state 46
+    ID              shift and go to state 47
 
 
 state 30
+
+    (34) string_node -> FLOOR BULLET . FLOOR
+
+    FLOOR           shift and go to state 48
+
+
+state 31
 
     (5) node_list -> node COMMA node_list .
 
@@ -875,7 +907,7 @@ state 30
     EXCLUDE         reduce using rule 5 (node_list -> node COMMA node_list .)
 
 
-state 31
+state 32
 
     (5) node_list -> node . COMMA node_list
     (6) node_list -> node .
@@ -896,27 +928,28 @@ state 31
     (9) node -> . node bullet_list
     (10) node -> . node L_PAREN bullet_list R_PAREN
     (15) node -> . node node
-    (17) node -> . range_node
-    (18) node -> . num_node
-    (19) node -> . string_node
-    (20) node -> . suffix_node
+    (18) node -> . range_node
+    (19) node -> . num_node
+    (20) node -> . string_node
+    (21) node -> . suffix_node
     (14) range_node -> . node WAVE_DASH node
     (13) num_node -> . num_node THEN num_node
     (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
-    (29) string_node -> . ID NUMBER
-    (30) string_node -> . ID NUMBER SUFFIX
-    (31) string_node -> . ID
-    (32) string_node -> . ID DOT ID
-    (33) string_node -> . FLOOR BULLET FLOOR
-    (34) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+    (17) string_node -> . string_node HYPHEN num_node
+    (30) string_node -> . ID NUMBER
+    (31) string_node -> . ID NUMBER SUFFIX
+    (32) string_node -> . ID
+    (33) string_node -> . ID DOT ID
+    (34) string_node -> . FLOOR BULLET FLOOR
+    (35) suffix_node -> . L_PAREN SUFFIX R_PAREN
 
   ! reduce/reduce conflict for R_PAREN resolved using rule 6 (node_list -> node .)
   ! shift/reduce conflict for COMMA resolved as shift
@@ -943,31 +976,31 @@ state 31
     string_node                    shift and go to state 8
     suffix_node                    shift and go to state 9
 
-state 32
+state 33
 
     (2) node -> node L_PAREN node_list . R_PAREN
     (3) node -> node L_PAREN node_list . EXCLUDE R_PAREN
     (4) node -> node L_PAREN node_list . R_PAREN EXCLUDE
 
-    R_PAREN         shift and go to state 47
-    EXCLUDE         shift and go to state 48
+    R_PAREN         shift and go to state 49
+    EXCLUDE         shift and go to state 50
 
 
-state 33
+state 34
 
     (10) node -> node L_PAREN bullet_list . R_PAREN
     (7) node_list -> bullet_list . COMMA node_list
     (8) node_list -> bullet_list .
 
   ! shift/reduce conflict for R_PAREN resolved as shift
-    R_PAREN         shift and go to state 49
+    R_PAREN         shift and go to state 51
     COMMA           shift and go to state 20
     EXCLUDE         reduce using rule 8 (node_list -> bullet_list .)
 
   ! R_PAREN         [ reduce using rule 8 (node_list -> bullet_list .) ]
 
 
-state 34
+state 35
 
     (11) bullet_list -> node . BULLET bullet_list
     (12) bullet_list -> node .
@@ -986,27 +1019,28 @@ state 34
     (9) node -> . node bullet_list
     (10) node -> . node L_PAREN bullet_list R_PAREN
     (15) node -> . node node
-    (17) node -> . range_node
-    (18) node -> . num_node
-    (19) node -> . string_node
-    (20) node -> . suffix_node
+    (18) node -> . range_node
+    (19) node -> . num_node
+    (20) node -> . string_node
+    (21) node -> . suffix_node
     (14) range_node -> . node WAVE_DASH node
     (13) num_node -> . num_node THEN num_node
     (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
-    (29) string_node -> . ID NUMBER
-    (30) string_node -> . ID NUMBER SUFFIX
-    (31) string_node -> . ID
-    (32) string_node -> . ID DOT ID
-    (33) string_node -> . FLOOR BULLET FLOOR
-    (34) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+    (17) string_node -> . string_node HYPHEN num_node
+    (30) string_node -> . ID NUMBER
+    (31) string_node -> . ID NUMBER SUFFIX
+    (32) string_node -> . ID
+    (33) string_node -> . ID DOT ID
+    (34) string_node -> . FLOOR BULLET FLOOR
+    (35) suffix_node -> . L_PAREN SUFFIX R_PAREN
 
   ! shift/reduce conflict for BULLET resolved as shift
   ! shift/reduce conflict for L_PAREN resolved as shift
@@ -1042,7 +1076,7 @@ state 34
     string_node                    shift and go to state 8
     suffix_node                    shift and go to state 9
 
-state 35
+state 36
 
     (11) bullet_list -> node BULLET bullet_list .
 
@@ -1059,7 +1093,7 @@ state 35
     EXCLUDE         reduce using rule 11 (bullet_list -> node BULLET bullet_list .)
 
 
-state 36
+state 37
 
     (14) range_node -> node WAVE_DASH node .
     (2) node -> node . L_PAREN node_list R_PAREN
@@ -1077,27 +1111,28 @@ state 36
     (9) node -> . node bullet_list
     (10) node -> . node L_PAREN bullet_list R_PAREN
     (15) node -> . node node
-    (17) node -> . range_node
-    (18) node -> . num_node
-    (19) node -> . string_node
-    (20) node -> . suffix_node
+    (18) node -> . range_node
+    (19) node -> . num_node
+    (20) node -> . string_node
+    (21) node -> . suffix_node
     (14) range_node -> . node WAVE_DASH node
     (13) num_node -> . num_node THEN num_node
     (16) num_node -> . num_node HYPHEN num_node
-    (21) num_node -> . PREFIX NUMBER
-    (22) num_node -> . PREFIX NUMBER SUFFIX
-    (23) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (24) num_node -> . NUMBER SUFFIX
-    (25) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
-    (26) num_node -> . NUMBER
-    (27) num_node -> . NUMBER COMPARATIVE_SUFFIX
-    (28) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
-    (29) string_node -> . ID NUMBER
-    (30) string_node -> . ID NUMBER SUFFIX
-    (31) string_node -> . ID
-    (32) string_node -> . ID DOT ID
-    (33) string_node -> . FLOOR BULLET FLOOR
-    (34) suffix_node -> . L_PAREN SUFFIX R_PAREN
+    (22) num_node -> . PREFIX NUMBER
+    (23) num_node -> . PREFIX NUMBER SUFFIX
+    (24) num_node -> . PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (25) num_node -> . NUMBER SUFFIX
+    (26) num_node -> . NUMBER SUFFIX COMPARATIVE_SUFFIX
+    (27) num_node -> . NUMBER
+    (28) num_node -> . NUMBER COMPARATIVE_SUFFIX
+    (29) num_node -> . PREFIX NUMBER COMPARATIVE_SUFFIX
+    (17) string_node -> . string_node HYPHEN num_node
+    (30) string_node -> . ID NUMBER
+    (31) string_node -> . ID NUMBER SUFFIX
+    (32) string_node -> . ID
+    (33) string_node -> . ID DOT ID
+    (34) string_node -> . FLOOR BULLET FLOOR
+    (35) suffix_node -> . L_PAREN SUFFIX R_PAREN
 
   ! shift/reduce conflict for L_PAREN resolved as shift
   ! shift/reduce conflict for WAVE_DASH resolved as shift
@@ -1131,7 +1166,7 @@ state 36
     string_node                    shift and go to state 8
     suffix_node                    shift and go to state 9
 
-state 37
+state 38
 
     (7) node_list -> bullet_list COMMA node_list .
 
@@ -1140,24 +1175,24 @@ state 37
     EXCLUDE         reduce using rule 7 (node_list -> bullet_list COMMA node_list .)
 
 
-state 38
-
-    (34) suffix_node -> L_PAREN SUFFIX R_PAREN .
-
-    COMMA           reduce using rule 34 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    L_PAREN         reduce using rule 34 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    BULLET          reduce using rule 34 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    WAVE_DASH       reduce using rule 34 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    PREFIX          reduce using rule 34 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    NUMBER          reduce using rule 34 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    ID              reduce using rule 34 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    FLOOR           reduce using rule 34 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    $end            reduce using rule 34 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    R_PAREN         reduce using rule 34 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-    EXCLUDE         reduce using rule 34 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
-
-
 state 39
+
+    (35) suffix_node -> L_PAREN SUFFIX R_PAREN .
+
+    COMMA           reduce using rule 35 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
+    L_PAREN         reduce using rule 35 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
+    BULLET          reduce using rule 35 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
+    WAVE_DASH       reduce using rule 35 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
+    PREFIX          reduce using rule 35 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
+    NUMBER          reduce using rule 35 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
+    ID              reduce using rule 35 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
+    FLOOR           reduce using rule 35 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
+    $end            reduce using rule 35 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
+    R_PAREN         reduce using rule 35 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
+    EXCLUDE         reduce using rule 35 (suffix_node -> L_PAREN SUFFIX R_PAREN .)
+
+
+state 40
 
     (13) num_node -> num_node THEN num_node .
     (13) num_node -> num_node . THEN num_node
@@ -1183,7 +1218,7 @@ state 39
   ! HYPHEN          [ reduce using rule 13 (num_node -> num_node THEN num_node .) ]
 
 
-state 40
+state 41
 
     (16) num_node -> num_node HYPHEN num_node .
     (13) num_node -> num_node . THEN num_node
@@ -1209,117 +1244,144 @@ state 40
   ! HYPHEN          [ reduce using rule 16 (num_node -> num_node HYPHEN num_node .) ]
 
 
-state 41
-
-    (22) num_node -> PREFIX NUMBER SUFFIX .
-    (23) num_node -> PREFIX NUMBER SUFFIX . COMPARATIVE_SUFFIX
-
-    THEN            reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    HYPHEN          reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    COMMA           reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    L_PAREN         reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    BULLET          reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    WAVE_DASH       reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    PREFIX          reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    NUMBER          reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    ID              reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    FLOOR           reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    $end            reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    R_PAREN         reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    EXCLUDE         reduce using rule 22 (num_node -> PREFIX NUMBER SUFFIX .)
-    COMPARATIVE_SUFFIX shift and go to state 50
-
-
 state 42
 
-    (28) num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .
+    (17) string_node -> string_node HYPHEN num_node .
+    (13) num_node -> num_node . THEN num_node
+    (16) num_node -> num_node . HYPHEN num_node
 
-    THEN            reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
-    HYPHEN          reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
-    COMMA           reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
-    L_PAREN         reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
-    BULLET          reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
-    WAVE_DASH       reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
-    PREFIX          reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
-    NUMBER          reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
-    ID              reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
-    FLOOR           reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
-    $end            reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
-    R_PAREN         reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
-    EXCLUDE         reduce using rule 28 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+  ! shift/reduce conflict for HYPHEN resolved as shift
+    COMMA           reduce using rule 17 (string_node -> string_node HYPHEN num_node .)
+    L_PAREN         reduce using rule 17 (string_node -> string_node HYPHEN num_node .)
+    BULLET          reduce using rule 17 (string_node -> string_node HYPHEN num_node .)
+    WAVE_DASH       reduce using rule 17 (string_node -> string_node HYPHEN num_node .)
+    PREFIX          reduce using rule 17 (string_node -> string_node HYPHEN num_node .)
+    NUMBER          reduce using rule 17 (string_node -> string_node HYPHEN num_node .)
+    ID              reduce using rule 17 (string_node -> string_node HYPHEN num_node .)
+    FLOOR           reduce using rule 17 (string_node -> string_node HYPHEN num_node .)
+    $end            reduce using rule 17 (string_node -> string_node HYPHEN num_node .)
+    R_PAREN         reduce using rule 17 (string_node -> string_node HYPHEN num_node .)
+    EXCLUDE         reduce using rule 17 (string_node -> string_node HYPHEN num_node .)
+    THEN            shift and go to state 22
+    HYPHEN          shift and go to state 23
+
+  ! HYPHEN          [ reduce using rule 17 (string_node -> string_node HYPHEN num_node .) ]
 
 
 state 43
 
-    (25) num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .
+    (23) num_node -> PREFIX NUMBER SUFFIX .
+    (24) num_node -> PREFIX NUMBER SUFFIX . COMPARATIVE_SUFFIX
 
-    THEN            reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    HYPHEN          reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    COMMA           reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    L_PAREN         reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    BULLET          reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    WAVE_DASH       reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    PREFIX          reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    NUMBER          reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    ID              reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    FLOOR           reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    $end            reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    R_PAREN         reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    EXCLUDE         reduce using rule 25 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    THEN            reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    HYPHEN          reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    COMMA           reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    L_PAREN         reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    BULLET          reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    WAVE_DASH       reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    PREFIX          reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    NUMBER          reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    ID              reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    FLOOR           reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    $end            reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    R_PAREN         reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    EXCLUDE         reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX .)
+    COMPARATIVE_SUFFIX shift and go to state 52
 
 
 state 44
 
-    (30) string_node -> ID NUMBER SUFFIX .
+    (29) num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .
 
-    COMMA           reduce using rule 30 (string_node -> ID NUMBER SUFFIX .)
-    L_PAREN         reduce using rule 30 (string_node -> ID NUMBER SUFFIX .)
-    BULLET          reduce using rule 30 (string_node -> ID NUMBER SUFFIX .)
-    WAVE_DASH       reduce using rule 30 (string_node -> ID NUMBER SUFFIX .)
-    PREFIX          reduce using rule 30 (string_node -> ID NUMBER SUFFIX .)
-    NUMBER          reduce using rule 30 (string_node -> ID NUMBER SUFFIX .)
-    ID              reduce using rule 30 (string_node -> ID NUMBER SUFFIX .)
-    FLOOR           reduce using rule 30 (string_node -> ID NUMBER SUFFIX .)
-    $end            reduce using rule 30 (string_node -> ID NUMBER SUFFIX .)
-    R_PAREN         reduce using rule 30 (string_node -> ID NUMBER SUFFIX .)
-    EXCLUDE         reduce using rule 30 (string_node -> ID NUMBER SUFFIX .)
+    THEN            reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    HYPHEN          reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    COMMA           reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    L_PAREN         reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    BULLET          reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    WAVE_DASH       reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    PREFIX          reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    NUMBER          reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    ID              reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    FLOOR           reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    $end            reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    R_PAREN         reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
+    EXCLUDE         reduce using rule 29 (num_node -> PREFIX NUMBER COMPARATIVE_SUFFIX .)
 
 
 state 45
 
-    (32) string_node -> ID DOT ID .
+    (26) num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .
 
-    COMMA           reduce using rule 32 (string_node -> ID DOT ID .)
-    L_PAREN         reduce using rule 32 (string_node -> ID DOT ID .)
-    BULLET          reduce using rule 32 (string_node -> ID DOT ID .)
-    WAVE_DASH       reduce using rule 32 (string_node -> ID DOT ID .)
-    PREFIX          reduce using rule 32 (string_node -> ID DOT ID .)
-    NUMBER          reduce using rule 32 (string_node -> ID DOT ID .)
-    ID              reduce using rule 32 (string_node -> ID DOT ID .)
-    FLOOR           reduce using rule 32 (string_node -> ID DOT ID .)
-    $end            reduce using rule 32 (string_node -> ID DOT ID .)
-    R_PAREN         reduce using rule 32 (string_node -> ID DOT ID .)
-    EXCLUDE         reduce using rule 32 (string_node -> ID DOT ID .)
+    THEN            reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    HYPHEN          reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    COMMA           reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    L_PAREN         reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    BULLET          reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    WAVE_DASH       reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    PREFIX          reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    NUMBER          reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    ID              reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    FLOOR           reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    $end            reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    R_PAREN         reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    EXCLUDE         reduce using rule 26 (num_node -> NUMBER SUFFIX COMPARATIVE_SUFFIX .)
 
 
 state 46
 
-    (33) string_node -> FLOOR BULLET FLOOR .
+    (31) string_node -> ID NUMBER SUFFIX .
 
-    COMMA           reduce using rule 33 (string_node -> FLOOR BULLET FLOOR .)
-    L_PAREN         reduce using rule 33 (string_node -> FLOOR BULLET FLOOR .)
-    BULLET          reduce using rule 33 (string_node -> FLOOR BULLET FLOOR .)
-    WAVE_DASH       reduce using rule 33 (string_node -> FLOOR BULLET FLOOR .)
-    PREFIX          reduce using rule 33 (string_node -> FLOOR BULLET FLOOR .)
-    NUMBER          reduce using rule 33 (string_node -> FLOOR BULLET FLOOR .)
-    ID              reduce using rule 33 (string_node -> FLOOR BULLET FLOOR .)
-    FLOOR           reduce using rule 33 (string_node -> FLOOR BULLET FLOOR .)
-    $end            reduce using rule 33 (string_node -> FLOOR BULLET FLOOR .)
-    R_PAREN         reduce using rule 33 (string_node -> FLOOR BULLET FLOOR .)
-    EXCLUDE         reduce using rule 33 (string_node -> FLOOR BULLET FLOOR .)
+    HYPHEN          reduce using rule 31 (string_node -> ID NUMBER SUFFIX .)
+    COMMA           reduce using rule 31 (string_node -> ID NUMBER SUFFIX .)
+    L_PAREN         reduce using rule 31 (string_node -> ID NUMBER SUFFIX .)
+    BULLET          reduce using rule 31 (string_node -> ID NUMBER SUFFIX .)
+    WAVE_DASH       reduce using rule 31 (string_node -> ID NUMBER SUFFIX .)
+    PREFIX          reduce using rule 31 (string_node -> ID NUMBER SUFFIX .)
+    NUMBER          reduce using rule 31 (string_node -> ID NUMBER SUFFIX .)
+    ID              reduce using rule 31 (string_node -> ID NUMBER SUFFIX .)
+    FLOOR           reduce using rule 31 (string_node -> ID NUMBER SUFFIX .)
+    $end            reduce using rule 31 (string_node -> ID NUMBER SUFFIX .)
+    R_PAREN         reduce using rule 31 (string_node -> ID NUMBER SUFFIX .)
+    EXCLUDE         reduce using rule 31 (string_node -> ID NUMBER SUFFIX .)
 
 
 state 47
+
+    (33) string_node -> ID DOT ID .
+
+    HYPHEN          reduce using rule 33 (string_node -> ID DOT ID .)
+    COMMA           reduce using rule 33 (string_node -> ID DOT ID .)
+    L_PAREN         reduce using rule 33 (string_node -> ID DOT ID .)
+    BULLET          reduce using rule 33 (string_node -> ID DOT ID .)
+    WAVE_DASH       reduce using rule 33 (string_node -> ID DOT ID .)
+    PREFIX          reduce using rule 33 (string_node -> ID DOT ID .)
+    NUMBER          reduce using rule 33 (string_node -> ID DOT ID .)
+    ID              reduce using rule 33 (string_node -> ID DOT ID .)
+    FLOOR           reduce using rule 33 (string_node -> ID DOT ID .)
+    $end            reduce using rule 33 (string_node -> ID DOT ID .)
+    R_PAREN         reduce using rule 33 (string_node -> ID DOT ID .)
+    EXCLUDE         reduce using rule 33 (string_node -> ID DOT ID .)
+
+
+state 48
+
+    (34) string_node -> FLOOR BULLET FLOOR .
+
+    HYPHEN          reduce using rule 34 (string_node -> FLOOR BULLET FLOOR .)
+    COMMA           reduce using rule 34 (string_node -> FLOOR BULLET FLOOR .)
+    L_PAREN         reduce using rule 34 (string_node -> FLOOR BULLET FLOOR .)
+    BULLET          reduce using rule 34 (string_node -> FLOOR BULLET FLOOR .)
+    WAVE_DASH       reduce using rule 34 (string_node -> FLOOR BULLET FLOOR .)
+    PREFIX          reduce using rule 34 (string_node -> FLOOR BULLET FLOOR .)
+    NUMBER          reduce using rule 34 (string_node -> FLOOR BULLET FLOOR .)
+    ID              reduce using rule 34 (string_node -> FLOOR BULLET FLOOR .)
+    FLOOR           reduce using rule 34 (string_node -> FLOOR BULLET FLOOR .)
+    $end            reduce using rule 34 (string_node -> FLOOR BULLET FLOOR .)
+    R_PAREN         reduce using rule 34 (string_node -> FLOOR BULLET FLOOR .)
+    EXCLUDE         reduce using rule 34 (string_node -> FLOOR BULLET FLOOR .)
+
+
+state 49
 
     (2) node -> node L_PAREN node_list R_PAREN .
     (4) node -> node L_PAREN node_list R_PAREN . EXCLUDE
@@ -1335,19 +1397,19 @@ state 47
     FLOOR           reduce using rule 2 (node -> node L_PAREN node_list R_PAREN .)
     $end            reduce using rule 2 (node -> node L_PAREN node_list R_PAREN .)
     R_PAREN         reduce using rule 2 (node -> node L_PAREN node_list R_PAREN .)
-    EXCLUDE         shift and go to state 51
+    EXCLUDE         shift and go to state 53
 
   ! EXCLUDE         [ reduce using rule 2 (node -> node L_PAREN node_list R_PAREN .) ]
 
 
-state 48
+state 50
 
     (3) node -> node L_PAREN node_list EXCLUDE . R_PAREN
 
-    R_PAREN         shift and go to state 52
+    R_PAREN         shift and go to state 54
 
 
-state 49
+state 51
 
     (10) node -> node L_PAREN bullet_list R_PAREN .
 
@@ -1364,26 +1426,26 @@ state 49
     EXCLUDE         reduce using rule 10 (node -> node L_PAREN bullet_list R_PAREN .)
 
 
-state 50
+state 52
 
-    (23) num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .
+    (24) num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .
 
-    THEN            reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    HYPHEN          reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    COMMA           reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    L_PAREN         reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    BULLET          reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    WAVE_DASH       reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    PREFIX          reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    NUMBER          reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    ID              reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    FLOOR           reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    $end            reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    R_PAREN         reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
-    EXCLUDE         reduce using rule 23 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    THEN            reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    HYPHEN          reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    COMMA           reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    L_PAREN         reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    BULLET          reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    WAVE_DASH       reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    PREFIX          reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    NUMBER          reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    ID              reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    FLOOR           reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    $end            reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    R_PAREN         reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
+    EXCLUDE         reduce using rule 24 (num_node -> PREFIX NUMBER SUFFIX COMPARATIVE_SUFFIX .)
 
 
-state 51
+state 53
 
     (4) node -> node L_PAREN node_list R_PAREN EXCLUDE .
 
@@ -1400,7 +1462,7 @@ state 51
     EXCLUDE         reduce using rule 4 (node -> node L_PAREN node_list R_PAREN EXCLUDE .)
 
 
-state 52
+state 54
 
     (3) node -> node L_PAREN node_list EXCLUDE R_PAREN .
 
@@ -1429,30 +1491,31 @@ WARNING: shift/reduce conflict for PREFIX in state 14 resolved as shift
 WARNING: shift/reduce conflict for NUMBER in state 14 resolved as shift
 WARNING: shift/reduce conflict for ID in state 14 resolved as shift
 WARNING: shift/reduce conflict for FLOOR in state 14 resolved as shift
-WARNING: shift/reduce conflict for COMMA in state 31 resolved as shift
-WARNING: shift/reduce conflict for R_PAREN in state 33 resolved as shift
-WARNING: shift/reduce conflict for BULLET in state 34 resolved as shift
-WARNING: shift/reduce conflict for L_PAREN in state 34 resolved as shift
-WARNING: shift/reduce conflict for WAVE_DASH in state 34 resolved as shift
-WARNING: shift/reduce conflict for PREFIX in state 34 resolved as shift
-WARNING: shift/reduce conflict for NUMBER in state 34 resolved as shift
-WARNING: shift/reduce conflict for ID in state 34 resolved as shift
-WARNING: shift/reduce conflict for FLOOR in state 34 resolved as shift
-WARNING: shift/reduce conflict for L_PAREN in state 36 resolved as shift
-WARNING: shift/reduce conflict for WAVE_DASH in state 36 resolved as shift
-WARNING: shift/reduce conflict for PREFIX in state 36 resolved as shift
-WARNING: shift/reduce conflict for NUMBER in state 36 resolved as shift
-WARNING: shift/reduce conflict for ID in state 36 resolved as shift
-WARNING: shift/reduce conflict for FLOOR in state 36 resolved as shift
-WARNING: shift/reduce conflict for THEN in state 39 resolved as shift
-WARNING: shift/reduce conflict for HYPHEN in state 39 resolved as shift
+WARNING: shift/reduce conflict for COMMA in state 32 resolved as shift
+WARNING: shift/reduce conflict for R_PAREN in state 34 resolved as shift
+WARNING: shift/reduce conflict for BULLET in state 35 resolved as shift
+WARNING: shift/reduce conflict for L_PAREN in state 35 resolved as shift
+WARNING: shift/reduce conflict for WAVE_DASH in state 35 resolved as shift
+WARNING: shift/reduce conflict for PREFIX in state 35 resolved as shift
+WARNING: shift/reduce conflict for NUMBER in state 35 resolved as shift
+WARNING: shift/reduce conflict for ID in state 35 resolved as shift
+WARNING: shift/reduce conflict for FLOOR in state 35 resolved as shift
+WARNING: shift/reduce conflict for L_PAREN in state 37 resolved as shift
+WARNING: shift/reduce conflict for WAVE_DASH in state 37 resolved as shift
+WARNING: shift/reduce conflict for PREFIX in state 37 resolved as shift
+WARNING: shift/reduce conflict for NUMBER in state 37 resolved as shift
+WARNING: shift/reduce conflict for ID in state 37 resolved as shift
+WARNING: shift/reduce conflict for FLOOR in state 37 resolved as shift
 WARNING: shift/reduce conflict for THEN in state 40 resolved as shift
 WARNING: shift/reduce conflict for HYPHEN in state 40 resolved as shift
-WARNING: shift/reduce conflict for EXCLUDE in state 47 resolved as shift
+WARNING: shift/reduce conflict for THEN in state 41 resolved as shift
+WARNING: shift/reduce conflict for HYPHEN in state 41 resolved as shift
+WARNING: shift/reduce conflict for HYPHEN in state 42 resolved as shift
+WARNING: shift/reduce conflict for EXCLUDE in state 49 resolved as shift
 WARNING: reduce/reduce conflict in state 3 resolved using rule (node_list -> node)
 WARNING: rejected rule (bullet_list -> node) in state 3
 WARNING: reduce/reduce conflict in state 14 resolved using rule (bullet_list -> node)
 WARNING: rejected rule (node -> node node) in state 14
-WARNING: reduce/reduce conflict in state 31 resolved using rule (node_list -> node)
-WARNING: rejected rule (bullet_list -> node) in state 31
+WARNING: reduce/reduce conflict in state 32 resolved using rule (node_list -> node)
+WARNING: rejected rule (bullet_list -> node) in state 32
 WARNING: Rule (node -> node node) is never reduced

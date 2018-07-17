@@ -202,3 +202,8 @@ class KenAllChoikiParserTest(unittest.TestCase):
         ret = ken_all_choiki_yacc.parse_choiki(s)
         self.assertEqual('越中畑-[64地割~66地割]', str(ret), s)
 
+    def test_choiki_parse031(self):
+        s = '滝沢（下川原１９０－１）'
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('滝沢-下川原-190-1', str(ret), s)
+

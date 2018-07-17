@@ -109,7 +109,7 @@ def p_bullet_list(p):
     """
     if len(p) == 2:
         p[0] = [p[1]]
-    elif (isinstance(p[1], NumberNode) or isinstance(p[1], StringNode))and p[1].children:
+    elif (isinstance(p[1], NumberNode) or isinstance(p[1], StringNode)) and p[1].children:
         for c in p[3]:
             p[1].add_child(c)
         p[0] = [p[1]]
@@ -188,6 +188,24 @@ def p_num_node_hyphen(p):
     p[3].suffix = ''
 
 
+def p_string_node_hyphen(p):
+    """
+    string_node : string_node HYPHEN num_node
+    """
+
+    def get_leaf(p: Node):
+        if p.children:
+            return get_leaf(p.children[0])
+        else:
+            return p
+
+    p[0] = p[1]
+    c = get_leaf(p[1])
+    c.add_child(p[3])
+    c.suffix = p[3].suffix
+    p[3].suffix = ''
+
+
 def p_node(p):
     """
     node : range_node
@@ -235,6 +253,7 @@ def p_num_node(p):
     elif len(p) == 4:
         p[0].prefix = p[1]
         p[0].comparative_suffix = p[3]
+
 
 def p_string_and_number_node(p):
     """
