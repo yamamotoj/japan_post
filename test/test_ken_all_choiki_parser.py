@@ -220,3 +220,14 @@ class KenAllChoikiParserTest(unittest.TestCase):
         ret = ken_all_choiki_yacc.parse_choiki(s)
         self.assertEqual('内橋-(790-1,多ノ津団地)', str(ret), s)
 
+    def test_choiki_parse041(self):
+        s = '野島江崎（１３、１４番地、１０番地の２、５）'
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('野島江崎-(13番地,14番地,10番地-(2,5))', str(ret), s)
+
+    def test_choiki_parse042(self):
+        s = '三田市の次に番地がくる場合'
+        ret = ken_all_choiki_yacc.parse_choiki(s)
+        self.assertEqual('の次に番地がくる場合', str(ret), s)
+
+

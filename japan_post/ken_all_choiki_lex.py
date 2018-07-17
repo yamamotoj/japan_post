@@ -72,7 +72,11 @@ def t_DOT(t):
 # noinspection PySingleQuotedDocstring
 def t_ID(t):
     r'[一-龥ぁ-んァ-ンヴＡ-Ｚａ-ｚー々ヶ○]+'
-    t.type = reserved.get(t.value, 'ID')  # Check for reserved words
+    if 'の次に番地がくる場合' in t.value:
+        t.value = 'の次に番地がくる場合'
+        t.type = 'SUFFIX'
+    else:
+        t.type = reserved.get(t.value, 'ID')  # Check for reserved words
     return t
 
 
