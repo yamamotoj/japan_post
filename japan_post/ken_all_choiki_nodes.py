@@ -5,6 +5,11 @@ class Node:
     def __init__(self):
         self.children = []
         self.parent = None
+        self.left_parenthesis = ''
+        self.right_parenthesis = ''
+
+    def to_string(self) -> str:
+        return ''
 
     def add_child(self, node: 'Node'):
         self.children.append(node)
@@ -113,8 +118,12 @@ class StringNode(Node):
 
 
 class ExcludeNode(Node):
+    def __init__(self, name):
+        super().__init__()
+        self.name = name
+
     def __str__(self):
-        return '除く' + super().__str__()
+        return self.name + super().__str__()
 
 
 class SuffixNode(Node):

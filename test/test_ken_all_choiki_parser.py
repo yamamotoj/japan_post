@@ -9,7 +9,7 @@ class KenAllChoikiParserTest(unittest.TestCase):
         s = '大江（１丁目、２丁目「６５１、６６２、６６８番地」以外、３丁目５、１３－４、２０、６７８、６８７番地）'
 
         ret = ken_all_choiki_yacc.parse(s)
-        self.assertEqual('大江-(1丁目,2丁目-除く-(651番地,662番地,668番地),3丁目-(5番地,13番地-4,20番地,678番地,687番地))',
+        self.assertEqual('大江-(1丁目,2丁目-以外-(651番地,662番地,668番地),3丁目-(5番地,13番地-4,20番地,678番地,687番地))',
                          str(ret), s)
 
     def test_choiki_parse002(self):
@@ -52,7 +52,7 @@ class KenAllChoikiParserTest(unittest.TestCase):
     def test_choiki_parse009(self):
         s = '花田町西宿（１１０－２、１１０－７、１１０－１０番地を除く）'
         ret = ken_all_choiki_yacc.parse(s)
-        self.assertEqual('花田町西宿-除く-(110番地-2,110番地-7,110番地-10)', str(ret), s)
+        self.assertEqual('花田町西宿-を除く-(110番地-2,110番地-7,110番地-10)', str(ret), s)
 
     def test_choiki_parse010(self):
         s = '三ツ松（５９６、８９４－１、９１５－４、９２５、９２７－２、９３２－４、９３４～９６８、１０１３－１、１４６４番地）'
@@ -65,18 +65,18 @@ class KenAllChoikiParserTest(unittest.TestCase):
         s = '折茂（今熊「２１３～２３４、２４０、２４７、２６２、２６６、２７５、２７７、２８０、２９５、１１９９、１２０６、１５０４を除く」、大原、沖山、上折茂「１－１３、７１－１９２を除く」）'
         ret = ken_all_choiki_yacc.parse(s)
         self.assertEqual(
-            '折茂-(今熊-除く-([213~234],240,247,262,266,275,277,280,295,1199,1206,1504),大原,沖山,上折茂-除く-(1-13,71-192))',
+            '折茂-(今熊-を除く-([213~234],240,247,262,266,275,277,280,295,1199,1206,1504),大原,沖山,上折茂-を除く-(1-13,71-192))',
             str(ret), s)
 
     def test_choiki_parse012(self):
         s = '葛巻（第４０地割「５７番地１２５、１７６を除く」～第４５地割）'
         ret = ken_all_choiki_yacc.parse(s)
-        self.assertEqual('葛巻-[第40地割-除く-57番地-(125,176)~第45地割]', str(ret), s)
+        self.assertEqual('葛巻-[第40地割-を除く-57番地-(125,176)~第45地割]', str(ret), s)
 
     def test_choiki_parse013(self):
         s = '土樋（１丁目「１１を除く」）'
         ret = ken_all_choiki_yacc.parse(s)
-        self.assertEqual('土樋-1丁目-除く-11', str(ret), s)
+        self.assertEqual('土樋-1丁目-を除く-11', str(ret), s)
 
     def test_choiki_parse014(self):
         s = '添川（渡戸沢「筍沢温泉」）'
@@ -87,19 +87,19 @@ class KenAllChoikiParserTest(unittest.TestCase):
         s = '南山（４３０番地以上「１７７０－１～２、１８６２－４２、１９２３－５を除く」、大谷地、折渡、鍵金野、金山、滝ノ沢、豊牧、沼の台、肘折、平林）'
         ret = ken_all_choiki_yacc.parse(s)
         self.assertEqual(
-            '南山-(430番地以上-除く-(1770-[1~2],1862-42,1923-5),大谷地,折渡,鍵金野,金山,滝ノ沢,豊牧,沼の台,肘折,平林)',
+            '南山-(430番地以上-を除く-(1770-[1~2],1862-42,1923-5),大谷地,折渡,鍵金野,金山,滝ノ沢,豊牧,沼の台,肘折,平林)',
             str(ret), s)
 
     def test_choiki_parse016(self):
         s = '茂田井（１～５００「２１１番地を除く」「古町」、２５２７～２５２９「土遠」）'
         ret = ken_all_choiki_yacc.parse(s)
-        self.assertEqual('茂田井-([1~500]-(除く-211番地,古町),[2527~2529]-土遠)', str(ret), s)
+        self.assertEqual('茂田井-([1~500]-(を除く-211番地,古町),[2527~2529]-土遠)', str(ret), s)
 
     def test_choiki_parse017(self):
         s = '牧之原（２５０～３４３番地「２５５、２５６、２５８、２５９、２６２、２７６、２９４～３００、３０２～３０４番地を除く」）'
         ret = ken_all_choiki_yacc.parse(s)
         self.assertEqual(
-            '牧之原-[250番地~343番地]-除く-(255番地,256番地,258番地,259番地,262番地,276番地,[294番地~300番地],[302番地~304番地])',
+            '牧之原-[250番地~343番地]-を除く-(255番地,256番地,258番地,259番地,262番地,276番地,[294番地~300番地],[302番地~304番地])',
             str(ret), s)
 
     def test_choiki_parse018(self):
@@ -150,7 +150,7 @@ class KenAllChoikiParserTest(unittest.TestCase):
     def test_choiki_parse027(self):
         s = '山田町下谷上（大上谷、修法ケ原、中一里山「９番地の４、１２番地を除く」長尾山、再度公園）'
         ret = ken_all_choiki_yacc.parse(s)
-        self.assertEqual('山田町下谷上-(大上谷,修法ケ原,中一里山-(除く-(9番地-4,12番地),長尾山),再度公園)', str(ret), s)
+        self.assertEqual('山田町下谷上-(大上谷,修法ケ原,中一里山-(を除く-(9番地-4,12番地),長尾山),再度公園)', str(ret), s)
 
     def test_choiki_parse028(self):
         s = '阿寒町上仁々志別'

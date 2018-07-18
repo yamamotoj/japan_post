@@ -24,6 +24,8 @@ def p_node_list_children(p):
     ns = arrange_node_list(p[3])
     for n in ns:
         p[0].add_child(n)
+    p[0].left_parenthesis = p[2]
+    p[0].right_parenthesis = p[4]
 
 
 def p_exlude_node(p):
@@ -31,11 +33,13 @@ def p_exlude_node(p):
     node : node L_PAREN node_list EXCLUDE R_PAREN
     """
     p[0] = p[1]
-    exclude_node = ExcludeNode()
+    exclude_node = ExcludeNode(p[4])
     ns = arrange_node_list(p[3])
     for n in ns:
         exclude_node.add_child(n)
     p[0].add_child(exclude_node)
+    exclude_node.left_parenthesis = p[2]
+    exclude_node.right_parenthesis = p[5]
 
 
 def p_exlude_node2(p):
@@ -43,11 +47,13 @@ def p_exlude_node2(p):
     node : node L_PAREN node_list R_PAREN EXCLUDE
     """
     p[0] = p[1]
-    exclude_node = ExcludeNode()
+    exclude_node = ExcludeNode(p[5])
     ns = arrange_node_list(p[3])
     for n in ns:
         exclude_node.add_child(n)
     p[0].add_child(exclude_node)
+    exclude_node.left_parenthesis = p[2]
+    exclude_node.right_parenthesis = p[4]
 
 
 def p_node_list(p):
