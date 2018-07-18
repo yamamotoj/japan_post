@@ -303,6 +303,7 @@ def p_string_and_number_node(p):
 def p_string_node(p):
     """
     string_node : ID
+                | DIRECTION
     """
     p[0] = StringNode(p[1])
 

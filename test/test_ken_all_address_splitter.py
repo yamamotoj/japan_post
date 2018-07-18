@@ -212,3 +212,11 @@ class KenAllAddressSplitterTest(unittest.TestCase):
         self.assertEqual([
             ('山形村一円', '')
         ], ret)
+
+    def test_split_022(self):
+        s = '南郷通（南）'
+        print(s)
+        ret = list(ken_all_address_splitter.split_choiki(s))
+        self.assertEqual([
+            ('南郷通', '南')
+        ], ret)

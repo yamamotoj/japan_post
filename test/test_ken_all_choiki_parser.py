@@ -243,3 +243,8 @@ class KenAllChoikiParserTest(unittest.TestCase):
         s = '山形村一円'
         ret = ken_all_choiki_yacc.parse(s)
         self.assertEqual('all', str(ret), s)
+
+    def test_choiki_parse046(self):
+        s = '南郷通（南）'
+        ret = ken_all_choiki_yacc.parse(s)
+        self.assertEqual('南郷通-南', str(ret), s)
