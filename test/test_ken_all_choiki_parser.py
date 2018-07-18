@@ -227,7 +227,7 @@ class KenAllChoikiParserTest(unittest.TestCase):
     def test_choiki_parse042(self):
         s = '三田市の次に番地がくる場合'
         ret = ken_all_choiki_yacc.parse(s)
-        self.assertEqual('の次に番地がくる場合', str(ret), s)
+        self.assertEqual('三田市の次に番地がくる場合', str(ret), s)
 
     def test_choiki_parse043(self):
         s = '士幌（南一区１８号～２１号南）'
