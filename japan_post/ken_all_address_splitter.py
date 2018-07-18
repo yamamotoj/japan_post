@@ -1,11 +1,11 @@
 from typing import Generator, Tuple
 
-from japan_post import ken_all_choiki_yacc
+from japan_post import ken_all_choiki_parser
 from japan_post.ken_all_choiki_nodes import RangeNode, Node, ExcludeNode, NumberNode, StringNode
 
 
 def split_choiki(choiki) -> Generator[Tuple[str, str], None, None]:
-    node = ken_all_choiki_yacc.parse(choiki)
+    node = ken_all_choiki_parser.parse(choiki)
     for n0 in node.children:
         left = n0.name
         if not n0.children:
