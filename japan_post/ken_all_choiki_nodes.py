@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Mapping, MutableMapping
 
 
 class Node:
@@ -7,9 +7,6 @@ class Node:
         self.parent = None
         self.left_parenthesis = ''
         self.right_parenthesis = ''
-
-    def to_string(self) -> str:
-        return ''
 
     def add_child(self, node: 'Node'):
         self.children.append(node)
@@ -51,6 +48,9 @@ class Node:
 
 
 class NumberNode(Node):
+    zenkaku_translator = str.maketrans({'0': '０', '1': '１', '2': '２', '3': '３', '4': '４', '5': '５', '6': '６',
+                          '7': '７', '8': '８', '9': '９'})
+
     def __init__(self, number: int):
         super().__init__()
         self.number = number
@@ -61,6 +61,11 @@ class NumberNode(Node):
     def __str__(self):
         return self.prefix + str(
             self.number) + self.suffix + self.comparative_suffix + super().__str__()
+
+    @property
+    def name(self):
+        num = str(self.number).translate(self.zenkaku_translator)
+        return self.prefix + num + self.suffix + self.comparative_suffix
 
     def apply_suffix(self, suffix):
         if self.suffix == suffix:
@@ -136,7 +141,6 @@ class SuffixNode(Node):
 
 
 class TopNode(Node):
-
     def __str__(self):
         if len(self.children) == 1:
             return str(self.children[0])

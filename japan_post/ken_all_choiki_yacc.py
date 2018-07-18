@@ -115,6 +115,8 @@ def p_paren_bullet_list(p):
     ns = arrange_node_list(p[3])
     for n in ns:
         p[0].add_child(n)
+    p[0].left_parenthis = p[2]
+    p[0].right_parenthis = p[4]
 
 
 def p_bullet_list(p):

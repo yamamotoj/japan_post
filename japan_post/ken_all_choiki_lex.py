@@ -75,7 +75,6 @@ def t_DOT(t):
 def t_ID(t):
     r'[一-龥ぁ-んァ-ンヴＡ-Ｚａ-ｚー々ヶ○]+'
     if 'の次に番地がくる場合' in t.value:
-        t.value = 'の次に番地がくる場合'
         t.type = 'SUFFIX'
     elif '一円' in t.value:
         t.type = 'ALL'
