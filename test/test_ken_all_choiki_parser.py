@@ -248,3 +248,8 @@ class KenAllChoikiParserTest(unittest.TestCase):
         s = '南郷通（南）'
         ret = ken_all_choiki_parser.parse(s)
         self.assertEqual('南郷通-南', str(ret), s)
+
+    def test_choiki_parse047(self):
+        s = '太田１の通り'
+        ret = ken_all_choiki_parser.parse(s)
+        self.assertEqual('南郷通-南', str(ret), s)

@@ -28,12 +28,10 @@ class KenAllItem:
                  jis_code: str,
                  old_zip_code: str,
                  zip_code: str,
-                 prefecture_name_kana: str,
-                 shikuchoson_name_kana: str,
-                 choiki_name_kana: str,
-                 prefecture_name: str,
-                 shikuchoson_name: str,
-                 choiki_name: str,
+                 prefecture: str,
+                 shikuchoson: str,
+                 choiki1: str,
+                 choiki2: str,
                  is_multipule_zip_code: bool,
                  has_koaza: bool,
                  has_chome: bool,
@@ -43,12 +41,10 @@ class KenAllItem:
         self.jis_code = jis_code
         self.old_zip_code = old_zip_code
         self.zip_code = zip_code
-        self.prefecture_name_kana = prefecture_name_kana
-        self.shikuchoson_name_kana = shikuchoson_name_kana
-        self.choiki_name_kana = choiki_name_kana
-        self.prefecture_name = prefecture_name
-        self.shikuchoson_name = shikuchoson_name
-        self.choiki_name = choiki_name
+        self.prefecture = prefecture
+        self.shikuchoson = shikuchoson
+        self.choiki1 = choiki1
+        self.choiki2 = choiki2
         self.is_multipule_zip_code = is_multipule_zip_code
         self.has_koaza = has_koaza
         self.has_chome = has_chome
